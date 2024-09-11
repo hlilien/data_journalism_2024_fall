@@ -34,6 +34,11 @@ We're going to load the slice of WinRed contribution data from West Virginia, wh
 **Task** Using the example from the pre_lab, write code to load the RDS file and assign it to a good variable name.
 
 ```{r}
+#object.       operator      function      this is input
+west_virginia <- readRDS('lab_01.rds')
+
+
+  
 ```
 
 ## Examine Data
@@ -42,31 +47,43 @@ We're going to load the slice of WinRed contribution data from West Virginia, wh
 
 **Q1** How many rows and columns does this dataframe have?
 
-**A1**
+**This dataframe has 40,441 rows and 24 columns**
 
 ```{r}
-
+glimpse(west_virginia)
 ```
 
 ## Answer questions
 
 **Q2** Which West Virginia city provided the largest number of contributions? How many?
 
-**A2**
+**Charleston - They made 3,226 contributions**
 
 ```{r}
+west_virginia |>
+  group_by(city) |>
+  summarise(
+    contributions = n()
+  ) |>
+  arrange(desc(contributions))
 ```
 
 **Q3** Which West Virginia cities accounted for the fewest contributions? How many of them, roughly speaking?
 
-**A3**
+**Winifrede, Milton, and Wolfcreek were the three lowest contributors in the dataset with 1 apiece, but there were about 63 cities that only made one contribution**
 
 ```{r}
+west_virginia |>
+  group_by(city) |>
+  summarise(
+    contributions = n()
+  ) |>
+  arrange(desc(contributions))
 ```
 
 **Q4** What's your best educated guess to explain why the city identified in question 2 had more contributions compared to the cities identified in question 3? Hint: you won't find the answer in the data, you'll need to do some quick web research. You do not need to write any code for this question, so no codeblock is provided.
 
-**A4**
+**The cities with the most might have a larger population, which often correlates with a higher number of contributions due to having more potential contributors.**
 
 **Q5** What recipient got the largest total amount of money? How many contributions did they receive and what was the average donation?
 
