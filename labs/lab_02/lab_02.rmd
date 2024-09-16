@@ -70,7 +70,7 @@ registrants_by_week
 
 **Q2** A better question is whether the new voters you found in Q1 are an outlier compared to other weeks this year. Using the original dataframe with 2024 registrants, use `mutate()` and lubridate to produce week numbers from the COUNTY_REGISTRATION_DATE (Lubridate has a function that turns a date into a week number. Use that to answer this question). Save that to the original dataframe. Then calculate how many voters are in each week. Describe the distribution of voters groups in a sentence - are the weeks from July 21-August 7 different from the rest, and if so, how?
 
-**A2**
+**The average counts per week through the July and August months were much higher than the average counts from the other weeks.**
 
 ```{r}
 # Add month information to the dataframe
@@ -87,7 +87,8 @@ registrants_by_month
 ```
 
 **Q3** Using lubridate, show which month saw the largest number of registrations. Does the answer help shed more light on Q2?
-**A3** 
+
+**Yes, this chart helped me decifer which weeks were within the July 21 - August 7 time frame.** 
 
 ```{r}
 md_voters_2024 <- md_voters_2024 |>
@@ -116,9 +117,22 @@ new_voters_by_region
 
 **Q4** Maryland has, officially, five regions: https://www.visitmaryland.org/article/maryland-regions. Modify the original dataframe again to add a `region` column based on the `COUNTY` value using case_when. Are you going to have to do this for every Maryland county plus Baltimore City? Yes, you are. Which regions and parties account for the most new voters?
 
-**A4** 
+**Western Maryland was the region that accounted for the most voters. And the Republican party took up the bulk of the new voters.** 
 
 ```{r}
+md_voters_2024 <- md_voters_2024 |>
+  mutate(region = case_when(
+    COUNTY %in% c("Baltimore City", "Anne Arundel", "Baltimore", "Carroll", "Harford", "Howard") ~ "Central Maryland",
+    COUNTY %in% c("Calvert", "Charles", "Prince George's", "St. Mary's") ~ "Capital Region",
+    COUNTY %in% c("Allegany", "Garrett", "Washington") ~ "Western Maryland",
+    COUNTY %in% c("Caroline", "Cecil", "Dorchester", "Kent", "Queen Anne's", "Somerset", "Talbot", "Wicomico", "Worcester") ~ "Eastern Shore",
+    COUNTY %in% c("Frederick", "Montgomery") ~ "Capital Region",
+    COUNTY %in% c("St. Mary's", "Charles", "Calvert") ~ "Southern Maryland",
+    TRUE ~ "Other"  # For any counties not covered in the above mappings
+  ))
+
+# View the dataframe to confirm the new region column
+head(md_voters_2024)
 ```
 
 **Q5** What's an additional question you could ask of this data?
