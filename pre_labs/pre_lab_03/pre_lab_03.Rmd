@@ -38,6 +38,8 @@ library(tidyverse)
 
 ```{r}
 texas_precinct_20 <- read_csv("data/tx_precinct_2020.csv", guess_max=10)
+
+glimpse(texas_precinct_20)
 ```
 
 ### Task 3: Check for problems on load
