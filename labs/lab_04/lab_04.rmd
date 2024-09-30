@@ -26,7 +26,7 @@ You'll need to load three packages for this: the tidyverse, lubridate and janito
 options(scipen=999)
 
 # Load the tidyverse. If you have not installed the tidyverse already, remove the # from the next line and run it first.  
-# install.packages('tidyverse')
+install.packages('tidyverse')
 library(tidyverse)
 library(janitor)
 library(lubridate)
@@ -47,7 +47,6 @@ You'll need to load one data set, a CSV file of campaign expenditures located in
 # Load the Maryland expenditures data table
 md_senate <- read_csv("data/md_senate_expenses.csv")
 
-# Display the data
 md_senate
 ```
 
@@ -61,45 +60,57 @@ Then, when you are done standardizing `purpose_clean`, export it as a new CSV fi
 
 Then, using that `purpose_clean` column, write code to find the largest amounts of spending on categories by both campaigns.
 
-**A1.**
+**The code is below, and I have close to 100 unique values.**
 
 ```{r}
-md_senate_clean <- read_csv("data/md%2Dsenate%2Dexpenses%2Dcsv%2E.csv")
-
 md_senate_clean |>
+  mutate(purpose_clean = case_when(
+    purpose_clean == "AD BUY" ~ "Media Advertising",
+    TRUE ~ purpose_clean
+  )) |>
   group_by(purpose_clean) |>
-  summarise (
+  summarise(
     total_spending = sum(amount, na.rm = TRUE),
     count = n()
   ) |>
-  arrange(desc(total_spending)) |>
-  
-  case_when(
-    
-  )
+  arrange(desc(total_spending))
 ```
 
 **Q2.** Let's do some research on the top purposes from A1. Feel free to search the Web to understand those terms better if need be, and then write a description comparing and contrasting the two campaigns' largest categories of spending.
 
-**A2.**
+**Campaigns that spend more on Media Advertising focus on getting quick visibility through ads, while those that invest more in Payroll/Salary are likely building a strong, engaged team on the ground. One focuses on reaching voters fast, the other on long-term staff-driven efforts.**
 
 **Q3.** Pick one of the top categories for each campaign and write code that shows how that spending has changed over time, if at all. You'll need to use lubridate for this. Write a couple of sentences describing that pattern.
 
-**A3.**
+**Their total spending over time really had nothing to do with their count which surprised me. I thought they wouldn't directly effected each other.**
 
 ```{r}
-
-
+md_senate_clean |>
+  filter(purpose_clean == "Media Advertising") |>
+  mutate(date = ymd(date)) |>  # Ensure the date is in the correct format
+  group_by(month = floor_date(date, "month")) |>  
+  summarise(
+    total_spending = sum(amount, na.rm = TRUE),
+    count = n()
+  ) |>
 ```
 
 **Q4.** Which committee has the larger payroll or salary spending so far? How many unique recipients of payroll/staff spending are there for each candidate?
 
-**A4.**
+**The media advertising group had the most total spending according to the data. I am not sure about the payroll/staff spending.**
 
 ```{r}
-
+md_senate_clean |>
+  filter(purpose_clean %in% c("Salary", "Payroll", "Staffing")) |>
+  group_by(candidate) |>
+  summarise(
+    total_payroll_spending = sum(amount, na.rm = TRUE),
+    unique_recipients = n_distinct(recipient)
+  ) |>
+  arrange(desc(total_payroll_spending)) |>
+  ungroup()
 ```
 
 **Q5** What's the most interesting story idea you've found in this data?
 
-**A5**
+**An interesting story idea is how some candidates spend big on media ads but much less on their staff. This could show a focus on outreach over building a strong team.**
