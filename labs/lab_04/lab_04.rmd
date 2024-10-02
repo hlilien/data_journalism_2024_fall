@@ -48,6 +48,8 @@ You'll need to load one data set, a CSV file of campaign expenditures located in
 md_senate <- read_csv("data/md_senate_expenses.csv")
 
 md_senate
+  mutate(purpose_clean = purpose) |>
+  
 ```
 
 ## Answer questions
@@ -74,6 +76,7 @@ md_senate_clean |>
     count = n()
   ) |>
   arrange(desc(total_spending))
+  
 ```
 
 **Q2.** Let's do some research on the top purposes from A1. Feel free to search the Web to understand those terms better if need be, and then write a description comparing and contrasting the two campaigns' largest categories of spending.
