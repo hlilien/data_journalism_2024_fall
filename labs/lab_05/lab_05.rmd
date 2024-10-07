@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 # load the tidyverse
 library(tidyverse)
+library(lubridate)
+library(janitor)
 ```
 
 ## Getting Started
@@ -26,75 +28,63 @@ First, load two CSV contribution files in the `data` folder, one each for donati
 
 ```{r}
 # load the Harris contribution data files and combine them
-july_donations <- read_csv("data/harris_july.csv")
-august_donations <- read_csv("data/harris_august.csv")
-harris_donations <- bind_rows(july_donations, august_donations)
+july_harris <- read_csv("data/july_harris.csv")
+august_harris <- read.csv("data/august_harris.csv") |>
+  mutate(date = ymd(date))
+harris_donations <- bind_rows(july_harris, august_harris) |> 
+  mutate(zip = as.character(zip))
 ```
 
 Next, let's read in the new voters (people who registered in 2024):
 
 ```{r}
 # load the new voters data
-new_voters <- read_csv("data/new_voters.csv")
+registered_2024 <- read_csv('data/new_voters.csv') |>
+  clean_names()
 ```
 
 Next join the Harris donations to the voter data. Remember, people's names are common, __so you'll want to use name columns and address information__. You'll need to figure out which columns to use from both dataframes. The new_voters data has both a single Address column and various parts of the address, such as HouseNumber. Make a plan for picking your join columns - try out some combinations - and save the results to a new dataframe.
 
 ```{r}
 # join the combined Harris file to the new voters
-# you will need to determine what columns to use
-joined_data <- harris_donations %>%
-  inner_join(new_voters, by = c("Name", "Address"))
+harris_donations <- (registered_2024) |>
+  inner_join(harris_donations, 
+             join_by(address == address_one, first_name == first_name, last_name == last_name, residential_city == city))
+harris_donations
+  
 ```
 
 ## Answer questions
 
 Q1. Explain why you used the columns you did to make the join, and why that result is better than other ways you tried. Are there any problems with the join you made, such as the possibility of false positives?
 
-A1. I used "Name" and "Address" as the join columns because they are the most likely identifiers. This means we're matching the right person across both datasets. However, there's a chance of false positives due to common names or people sharing addresses (like family members).
+A1. Using these columns for names, cities, etc remain constant. This makes file merging easier.
 
 Q2. Based on your join, how many donations to Harris have come from people who registered this year? How many unique people does that represent, and which donors have given the largest _number_ of donations since July 20? 
 
-A2. **I used ChatGPT for this. I did not know what to do**
+A2. 326 donations have come from people who registered this year, represented by 238 unique donors.
 
 ```{r}
-num_donations <- nrow(joined_data)
-unique_donors <- joined_data %>% distinct(Name, Address) %>% nrow()
-largest_donors <- joined_data %>% 
-  filter(Date > "2024-07-20") %>% 
-  group_by(Name, Address) %>% 
-  summarise(donation_count = n()) %>% 
-  arrange(desc(donation_count)) %>% 
-  top_n(1, donation_count)
+unique_people <- harris_donations |>
+  summarise(
+    total_donations = n(),
+    unique_donors = n_distinct(paste(first_name, last_name)
+  ))
+unique_people
 
-num_donations
-unique_donors
-largest_donors
 ```
 
 Q3. What are the party and gender breakdowns of those donors? How many donations has Harris gotten from non-Democrats?
 
-A3. 
+A3. Of the donors, there were 12 donors who did not specify their gender and 173 females and 141 males. Regarding non-Democratic contributions, 32 individuals made contributions.
 
 ```{r}
-party_gender_breakdown <- joined_data %>%
-  group_by(Party, Gender) %>%
-  summarise(total_donations = n())
-
-non_democrat_donations <- joined_data %>%
-  filter(Party != "Democrat") %>%
-  summarise(non_dem_donations = n())
-
-party_gender_breakdown
-non_democrat_donations
+gender_breakdown <- harris_donations |>
+  group_by(gender) |>
+  summarise(donation_count = n())
+gender_breakdown
 ```
 
 Q4. Choose your own adventure: I want you to come up with a question you could ask of one of the dataframes we've created for this lab. It could involve just the new voters, or the donors or the joined dataframe, but it cannot be a variation of a previous question (so, for example, you can't ask, "How many Republicans have given to Harris"). First write the question and then try to answer it by writing code. If you're not sure of the exact code, try googling (or ask me for advice) but, at a minimum, describe what you think you'd have to do to answer it and what the results would look like. That can help.
 
-A4:age_distribution <- joined_data %>%
-  filter(Date > "2024-07-21") %>%
-  group_by(Age) %>%
-  summarise(donations = n()) %>%
-  arrange(Age)
-
-age_distribution
+A4: 78 different cities. 
