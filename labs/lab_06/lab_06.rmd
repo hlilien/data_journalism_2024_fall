@@ -20,7 +20,9 @@ knitr::opts_chunk$set(echo = TRUE)
 options(scipen=999)
 
 # Load the tidyverse and any other libraries you'll need
-
+library(tidyverse)
+library(lubridate)
+library(janitor)
 ```
 
 ## Get Our PDF
@@ -50,22 +52,30 @@ You will need to read in and clean up the data so that it can be used for analys
 
 ```{r}
 # Party registrations
+ party_registrations <- read.csv("data/new_registrations_by_party.csv")
 
+party_registrations
 ```
 
 ```{r}
 # Removals
+removals <- read.csv("data/removals_by_party.csv")
 
+removals
 ```
 
 ```{r}
 # Changes
+changes <- read.csv("data/changes_in_registration.csv")
 
+changes
 ```
 
 ```{r}
 # Current registrations
+current_registrations <- read.csv("data/current_registrations.csv")
 
+current_registrations
 ```
 
 ## Rinse, Repeat: September 2022 data
