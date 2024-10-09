@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introduction 
 
 In this notebook, we are reverse engineering the story, 
-[Millions in out-of-state donations help fuel high-profile Maryland Democratic governor candidates](https://cnsmaryland.org/2022/03/03/millions-in-out-of-state-donations-help-fuel-high-profile-maryland-democratic-governor-candidates/)
+[In North Carolina, Black Voters’ Mail-In Ballots Much More Likely to Be Rejected Than Those From Any Other Race](https://www.propublica.org/article/in-north-carolina-black-voters-mail-in-ballots-much-more-likely-to-be-rejected-than-those-from-any-other-race)
 
 ## Load libraries
 
@@ -41,11 +41,13 @@ In this section, describe the source of the data, write a basic data dictionary 
 
 # Path to data should be loaded from folder "data" i.e. read_csv("data/name_of_data.csv")
 
-Story_data <- read_csv("data/nonvoters_data.csv")
-view(Story_data)
-
-# Clean required data and prepare for analysis if needed. 
-
+NewVoter_data <- read_csv("data/nonvoters_data.csv",
+  guess_max = 2111797) |>
+  clean_names() |>
+  mutate(
+    voter_zip = as.character(voter_zip),
+    election_dt = as.Date(election_dt)
+  )
 ```
 
 ## Sentences to Engineer
@@ -58,6 +60,12 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ```{r}
 # Put code to reverse engineer sentence here
+NewVoter_data |>
+  group_by(race, ballot_rtn_status)|>
+  summarise(count = n())|>
+arrange(desc(count))
+
+
 
 # Display results of code below this codeblock
 

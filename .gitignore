@@ -41,3 +41,6 @@ vignettes/*.pdf
 # DS Store
 .DS_Store
 *.DS_Store
+
+# ignore large csv from reverse engineering file
+/major_assignments/reverse_engineering/data/nonvoters_data.csv
