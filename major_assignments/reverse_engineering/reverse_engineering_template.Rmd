@@ -55,8 +55,8 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ### Sentence 1
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Sentence text**: [“Black voters were more than twice as likely to have mail-in ballots rejected than those submitted by the state’s white voters in 2018, and rejection rates for 2020 show a similar pattern, according to a new analysis by ProPublica and WRAL News.” ]
+* **Analysis summary**: [This paragraph establishes a foundation for the entire investigation. It is clear that original data analysis by the reporters unearthed racial disparities in ballot rejection rates. This finding is key to understanding the study's focus on systemic inequalities.]
 
 ```{r}
 # Put code to reverse engineer sentence here
@@ -73,11 +73,15 @@ arrange(desc(count))
 
 ### Sentence 2
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Sentence text**: [“Guilford County, the third-most populous county in North Carolina, rejected the largest number of mail-in ballots by Black voters statewide: 177. The rejection rate for Black voters, at 16.5%, was three times as high as the rejection rate for white voters, 5.5%, putting the county largely in line with the rest of the state.”]
+* **Analysis summary**: [This specific example illustrates a racial disparity in one of the most populous counties, revealing how data analysis spotlighted local discrepancies and used them as evidence of broader statewide patterns.]
 
 ```{r}
 # Put code to reverse engineer sentence here
+NewVoter_data |>
+  group_by(county_desc, race)|>
+  summarise(count = n())|>
+arrange(desc(count))
 
 # Display results of code below this codeblock
 
@@ -85,8 +89,8 @@ arrange(desc(count))
 
 ### Sentence 3
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Sentence text**: [“So far, 2020 shows a similar pattern. As of Sept. 23, the rejection rate for mail-in ballots submitted by Black voters was about 3%, nearly three times as high as the rejection rate for white voters, according to data from the state.”]
+* **Analysis summary**: [This paragraph shows the continuity of the trend, linking current data to the same issues observed in 2018. It confirms that disparities persist.]
 
 ```{r}
 # Put code to reverse engineer sentence here

@@ -86,22 +86,30 @@ To answer the following questions, you'll need to calculate percentages and do o
 
 ```{r}
 # Party registrations
+party_registrations_September <- read.csv("data/new_registrations_by_party_Sep.csv")
 
+party_registrations_September
 ```
 
 ```{r}
 # Removals
+removals_September <- read.csv("data/removals_by_party_Sep.csv")
 
+removals_September
 ```
 
 ```{r}
 # Changes
+changes_September <- read.csv("data/changes_in_registration_Sep.csv")
 
+changes_September
 ```
 
 ```{r}
 # Current registrations
+current_registrations_September <- read.csv("data/current_registrations_Sep.csv")
 
+current_registrations_September
 ```
 
 ## Answer questions
