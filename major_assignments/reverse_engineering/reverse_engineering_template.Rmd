@@ -95,6 +95,27 @@ arrange(desc(count))
 ```{r}
 # Put code to reverse engineer sentence here
 
+NC_rejected <- NC_voter_data |>
+  filter(ballot_rtn_status != "ACCEPTED",
+         ballot_req_type == "MAIL") |>
+  group_by(race)|>
+  summarise(count = n())|>
+arrange(desc(count))
+
+NC_total_race <- NC_voter_data |>
+  filter(ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(count = n()) |>
+arrange(desc(count))
+  
+NC_percent_rejected <- NC_total_race |> left_join(NC_rejected, join_by(race)) |>
+  rename(
+    total = count.x,
+    rejected = count.y
+  ) |>
+  mutate(percent_spolied = (rejected/total))
+
+
 # Display results of code below this codeblock
 
 ```
