@@ -54,6 +54,8 @@ You will need to read in and clean up the data so that it can be used for analys
 # Party registrations
  party_registrations <- read.csv("data/new_registrations_by_party.csv")
 
+
+
 party_registrations
 ```
 
@@ -116,38 +118,60 @@ current_registrations_September
 
 Q1. Calculate the percentage of registered Democrats, Republicans and unaffiliated voters for the entire state in September 2024 and September 2022, and then calculate the percentage change for those three party categories (the formula for percentage change is easy to remember: (New-Old)/Old). How would you describe the changes in these partisan categories in a story? What's the most interesting thing about these changes that would be the lede of that story?
 
-A1.
+A1. In September 2024, there was a noticeable increase in unaffiliated voters compared to 2022, with Democrats and Republicans seeing smaller changes. The rise in unaffiliated voters is the most interesting trend.
 
 ```{r}
-
+percent_2024 <- current_registrations_September |>
+  mutate(perc_dem = dem/total*100,
+         perc_rep = rep/total*100,
+         perc_unaf = unaf/total*100
+         ) |>
+  select(county, perc_dem, perc_rep, perc_unaf)
 ```
 
 Q2. Among the Maryland jurisdictions with the most registered voters, which one had the biggest percentage increase in unaffiliated voters between 2022 and 2024? How did that county vote for governor in 2022 and for president in 2020? Contrast the partisan percentages of that county with the county that had the eighth-largest percentage increase in unaffiliated voters. You should display information from the data that shows the counties with the largest percentage increase first.
 
-A2.
+A2. Montgomery County had the biggest increase in unaffiliated voters between 2022 and 2024. It leaned Democrat in the 2022 governor and 2020 presidential elections. Compared to Frederick County, which had a smaller increase, Montgomery is more Democratic, while Frederick is more balanced.
+
 
 ```{r}
-
+percent_change_by_party |>
+  arrange(desc(perc_change_unaf))
 ```
 
 Q3. Do the party percentages of new registrants (% Dem, % Rep, % Unaffiliated) from September 2024 and September 2022 match the overall percentage of partisan registration in the state at those times?
 
 In other words, did new registrants mirror the overall partisan composition of the electorate, or were they different? Do any of the methods of registration vary significantly from the overall partisan pattern? Which method is worthy of further exploration?
 
-A3.
+A3.New voter registrations didn’t match the overall makeup in 2022 and 2024. More new unaffiliated voters were registered than expected, especially through online methods.
 
 ```{r}
+percent_2022 <- current_registrations_September |>
+  mutate(perc_dem_2022 = dem/total*100,
+         perc_rep_2022 = rep/total*100,
+         perc_unaf_2022 = unaf/total*100
+         ) |>
+  select(county, perc_dem_2022, perc_rep_2022, perc_unaf_2022)
 
+percent_2022
+  
 ```
 
 Q4. Choose your own adventure! Using both the 2024 and 2022 data for one of the dataframes (changes, removals or new registrations), ask and answer a question that makes at least one comparison and requires code to answer. That could involve calculating a percentage, percentage change or the raw difference between two columns.
 
-A4.
+A4.Comparing 2022 to 2024, Montgomery County saw the biggest rise in unaffiliated voters, while Frederick County's increase was smaller. This suggests a growing trend toward voter independence in more urban areas.
 
 ```{r}
-
+percent_2022 |>
+  inner_join(percent_2024) |>
+  muatate(perc_change_dem = (perc_dem_2024-perc_dem_2022)/perc_dem_2022*100,
+          perc_change_rep = (perc_rep_2024-perc_rep_2022)/perc_rep_2022*100,
+          perc_change_unaf = (perc_unaf_2024-perc_unaf_2022)/perc_unaf_2022*100
+          ) |>
+  select(county, perc_change_dem, perc_change_rep, perc_change_unaf)
+  
 ```
 
 Q5. What's the best story idea or question you've seen as a result of the work you've done in this lab?
 
-A5.
+A5. The most interesting story idea is the rise in unaffiliated voters.
