@@ -60,49 +60,15 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ```{r}
 # Put code to reverse engineer sentence here
-NewVoter_data |>
-  group_by(race, ballot_rtn_status)|>
-  summarise(count = n())|>
-arrange(desc(count))
 
-
-
-# Display results of code below this codeblock
-
-```
-
-### Sentence 2
-
-* **Sentence text**: [“Guilford County, the third-most populous county in North Carolina, rejected the largest number of mail-in ballots by Black voters statewide: 177. The rejection rate for Black voters, at 16.5%, was three times as high as the rejection rate for white voters, 5.5%, putting the county largely in line with the rest of the state.”]
-* **Analysis summary**: [This specific example illustrates a racial disparity in one of the most populous counties, revealing how data analysis spotlighted local discrepancies and used them as evidence of broader statewide patterns.]
-
-```{r}
-# Put code to reverse engineer sentence here
-NewVoter_data |>
-  group_by(county_desc, race)|>
-  summarise(count = n())|>
-arrange(desc(count))
-
-# Display results of code below this codeblock
-
-```
-
-### Sentence 3
-
-* **Sentence text**: [“So far, 2020 shows a similar pattern. As of Sept. 23, the rejection rate for mail-in ballots submitted by Black voters was about 3%, nearly three times as high as the rejection rate for white voters, according to data from the state.”]
-* **Analysis summary**: [This paragraph shows the continuity of the trend, linking current data to the same issues observed in 2018. It confirms that disparities persist.]
-
-```{r}
-# Put code to reverse engineer sentence here
-
-NC_rejected <- NC_voter_data |>
+NC_rejected <- NewVoter_data |>
   filter(ballot_rtn_status != "ACCEPTED",
          ballot_req_type == "MAIL") |>
   group_by(race)|>
   summarise(count = n())|>
 arrange(desc(count))
 
-NC_total_race <- NC_voter_data |>
+NC_total_race <- NewVoter_data |>
   filter(ballot_req_type == "MAIL") |>
   group_by(race) |>
   summarise(count = n()) |>
@@ -115,32 +81,130 @@ NC_percent_rejected <- NC_total_race |> left_join(NC_rejected, join_by(race)) |>
   ) |>
   mutate(percent_spolied = (rejected/total))
 
+NC_rejected
+
+```
+
+### Sentence 2
+
+* **Sentence text**: [“Guilford County, the third-most populous county in North Carolina, rejected the largest number of mail-in ballots by Black voters statewide: 177. The rejection rate for Black voters, at 16.5%, was three times as high as the rejection rate for white voters, 5.5%, putting the county largely in line with the rest of the state.”]
+* **Analysis summary**: [This specific example illustrates a racial disparity in one of the most populous counties, revealing how data analysis spotlighted local discrepancies and used them as evidence of broader statewide patterns.]
+
+```{r}
+# Put code to reverse engineer sentence here
+
+Guilford_rejected <- NewVoter_data |>
+  filter(county_desc == "GUILFORD",
+         ballot_rtn_status != "ACCEPTED",
+         ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(rejected_count = n())
+
+Guilford_total <- NewVoter_data |>
+  filter(county_desc == "GUILFORD",
+         ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(total_count = n())
 
 # Display results of code below this codeblock
+Guilford_rates <- Guilford_total |>
+  left_join(Guilford_rejected, by = "race") |>
+  mutate(rejected_count = replace_na(rejected_count, 0),
+         rejection_rate = (rejected_count / total_count) * 100)
+
+Guilford_rates
+
+
+```
+
+### Sentence 3
+
+* **Sentence text**: [“Moore County, which rejected about one-third of the 149 mail-in ballots returned by Black voters in 2018, says she was unaware that the ballot she sent in wasn’t counted.”]
+* **Analysis summary**: [This paragraph shows the continuity of the trend, linking current data to the same issues observed in 2018. It confirms that disparities persist.]
+
+```{r}
+# Put code to reverse engineer sentence here
+Moore_rejected <- NewVoter_data |>
+  filter(county_desc == "MOORE",
+         ballot_rtn_status != "ACCEPTED",
+         ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(rejected_count = n())
+
+Moore_total <- NewVoter_data |>
+  filter(county_desc == "MOORE",
+         ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(total_count = n())
+
+
+Moore_rates <- Moore_total |>
+  left_join(Guilford_rejected, by = "race") |>
+  mutate(rejected_count = replace_na(rejected_count, 0),
+         rejection_rate = (rejected_count / total_count) * 100)
+
+Moore_rates
 
 ```
 
 ### Sentence 4
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Sentence text**: [“The analysis by ProPublica and WRAL News shows 40% of rejected ballots were submitted by voters who identify as Black or African American, Indian American or Alaska Native, Asian, two or more races, or other.”]
+* **Analysis summary**: [By analyzing multiple demographic groups, the reporters’ work reveals that minority groups disproportionately face mail-in ballot rejections, showing the broad scope of the problem.]
 
 ```{r}
 # Put code to reverse engineer sentence here
 
-# Display results of code below this codeblock
+rejected_ballots <- NewVoter_data |>
+  filter(ballot_rtn_status != "ACCEPTED", 
+         ballot_req_type == "MAIL")         
+
+rejected_by_minority_groups <- rejected_ballots |>
+  filter(race %in% c("Black", "American Indian or Alaska Native", "Asian", "Other", "Two or more races")) |> 
+  group_by(race) |>                       
+  summarise(rejected_count = n())            
+
+
+total_rejected <- rejected_ballots |> 
+  summarise(total_count = n()) |>           
+  pull(total_count)
+
+rejected_percentage <- rejected_by_minority_groups |>
+  summarise(percentage = (sum(rejected_count) / total_rejected) * 100)
+
+# Display the percentage of rejected ballots from minority groups
+rejected_percentage
 
 ```
 
 ### Sentence 5
 
-* **Sentence text**: [Paste in sentence to engineer here]
-* **Analysis summary**: [Write up two to three sentences describing the results of your analysis.  Were you able to confirm the finding? If not, why not?]
+* **Sentence text**: [“The disparity holds for rural counties as well as urban ones, in areas dominated by Republican voters and Democratic voters alike. In largely urban Wake County, for example, the rejection rate for ballots cast by Black voters is twice that of ballots cast by white voters.”]
+* **Analysis summary**: [This finding highlights the geographical range of the problem and how racial disparities in mail-in ballot rejection extend across various political landscapes.]
 
 ```{r}
 # Put code to reverse engineer sentence here
 
-# Display results of code below this codeblock
+Wake_rejected <- NewVoter_data |>
+  filter(county_desc == "WAKE",
+         ballot_rtn_status != "ACCEPTED",
+         ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(rejected_count = n())
+
+Wake_total <- NewVoter_data |>
+  filter(county_desc == "WAKE",
+         ballot_req_type == "MAIL") |>
+  group_by(race) |>
+  summarise(total_count = n())
+
+
+Wake_rates <- Wake_total |>
+  left_join(Wake_rejected, by = "race") |>
+  mutate(rejected_count = replace_na(rejected_count, 0),
+         rejection_rate = (rejected_count / total_count) * 100)
+
+Wake_rates
 
 ```
 
