@@ -39,15 +39,14 @@ In this section, describe the source of the data, write a basic data dictionary 
 ```{r}
 # Load required data
 
-# Path to data should be loaded from folder "data" i.e. read_csv("data/name_of_data.csv")
-
-NewVoter_data <- read_csv("data/nonvoters_data.csv",
-  guess_max = 2111797) |>
+NewVoter_data <- read_csv("data/nonvoters_data.csv", guess_max = 2111797) |>
   clean_names() |>
   mutate(
     voter_zip = as.character(voter_zip),
-    election_dt = as.Date(election_dt)
+    election_dt = as.Date(election_dt, format = "%Y-%m-%d"),
+    ballot_rtn_dt = as.Date(ballot_rtn_dt, format = "%Y-%m-%d")
   )
+
 ```
 
 ## Sentences to Engineer
@@ -60,27 +59,30 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ```{r}
 # Put code to reverse engineer sentence here
+
 NC_rejected <- NewVoter_data |>
   filter(ballot_rtn_status != "ACCEPTED",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race)|>
   summarise(count = n())|>
-arrange(desc(count))
+  arrange(desc(count))
 
 NC_total_race <- NewVoter_data |>
   filter(ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(count = n()) |>
-arrange(desc(count))
-  
-NC_percent_rejected <- NC_total_race |> left_join(NC_rejected, join_by(race)) |>
+  arrange(desc(count))
+
+NC_percent_rejected <- NC_total_race |>
+  left_join(NC_rejected, by = "race") |>
   rename(
     total = count.x,
     rejected = count.y
   ) |>
-  mutate(percent_spolied = (rejected/total)*100)
+  mutate(rejected = replace_na(rejected, 0),
+         percent_spoiled = (rejected / total) * 100)
 
 NC_percent_rejected
 
@@ -97,23 +99,24 @@ Guilford_rejected <- NewVoter_data |>
   filter(county_desc == "GUILFORD",
          ballot_rtn_status != "ACCEPTED",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(rejected_count = n())
 
 Guilford_total <- NewVoter_data |>
   filter(county_desc == "GUILFORD",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(total_count = n())
 
 Guilford_rates <- Guilford_total |>
   left_join(Guilford_rejected, by = "race") |>
   mutate(rejected_count = replace_na(rejected_count, 0),
-         rejection_rate = (rejected_count/total_count)*100)
+         rejection_rate = (rejected_count / total_count) * 100)
 
 Guilford_rates
+
 
 ```
 
@@ -127,23 +130,24 @@ Moore_rejected <- NewVoter_data |>
   filter(county_desc == "MOORE",
          ballot_rtn_status != "ACCEPTED",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(rejected_count = n())
 
 Moore_total <- NewVoter_data |>
   filter(county_desc == "MOORE",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(total_count = n())
 
 Moore_rates <- Moore_total |>
   left_join(Moore_rejected, by = "race") |>
   mutate(rejected_count = replace_na(rejected_count, 0),
-         rejection_rate = (rejected_count/total_count)*100)
+         rejection_rate = (rejected_count / total_count) * 100)
 
 Moore_rates
+
 
 ```
 
@@ -156,13 +160,13 @@ Moore_rates
 # Put code to reverse engineer sentence here
 NC_rejected_total <- NewVoter_data |>
   filter(ballot_rtn_status != "ACCEPTED",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   summarise(count = n())
 
 NC_rejected_nonwhite <- NewVoter_data |>
   filter(ballot_rtn_status != "ACCEPTED",
          race != "WHITE",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   summarise(count = n())
 
 NC_rejected_ratio <- bind_cols(NC_rejected_nonwhite, NC_rejected_total) |>
@@ -171,7 +175,7 @@ NC_rejected_ratio <- bind_cols(NC_rejected_nonwhite, NC_rejected_total) |>
     nonwhite = count_1,
     total = count_2
   ) |>
-  mutate(nonwhite_rejected = (nonwhite/total)*100)
+  mutate(nonwhite_rejected = (nonwhite / total) * 100)
 
 NC_rejected_ratio
 
@@ -188,24 +192,23 @@ Wake_rejected <- NewVoter_data |>
   filter(county_desc == "WAKE",
          ballot_rtn_status != "ACCEPTED",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(rejected_count = n())
 
 Wake_total <- NewVoter_data |>
   filter(county_desc == "WAKE",
          ballot_req_type == "MAIL",
-         ballot_rtn_dt >= "2018-01-01" & ballot_rtn_dt <= "2018-12-31") |>
+         ballot_rtn_dt >= as.Date("2018-01-01") & ballot_rtn_dt <= as.Date("2018-12-31")) |>
   group_by(race) |>
   summarise(total_count = n())
 
 Wake_rates <- Wake_total |>
   left_join(Wake_rejected, by = "race") |>
   mutate(rejected_count = replace_na(rejected_count, 0),
-         rejection_rate = (rejected_count/total_count)*100)
+         rejection_rate = (rejected_count / total_count) * 100)
 
 Wake_rates
-
 
 ```
 
