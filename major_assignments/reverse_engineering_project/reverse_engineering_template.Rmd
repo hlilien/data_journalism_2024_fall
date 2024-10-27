@@ -14,6 +14,10 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+# Replace with the path to your project directory
+zip("Reverse_Engineering_Project.zip", "Reverse_Engineering_Project/")
+
 ```
 
 ## Introduction 
