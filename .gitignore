@@ -47,3 +47,6 @@ vignettes/*.pdf
 
 # ignore large csv from reverse engineering file
 /major_assignments/reverse_engineering/data/absentee_20181106.csv
+
+# ignore large csv from reverse engineering file
+/major_assignments/reverse_engineering_project/data/absentee_20181106.csv

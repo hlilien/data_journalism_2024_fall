@@ -49,9 +49,23 @@ md_ballots_date <- read_csv("data/md_absentee_ballots_date.csv")
 -   Good labels for the x & y axis and a caption for the source, which is the Maryland State Board of Elections
 -   Readable bars - the values shouldn't be overlapping
 
-**A1.** 
+**A1 - Worcester** 
 
 ```{r}
+md_ballots |>
+  mutate(percent_return = `TOTAL RECEIVED` / `TOTAL SENT` * 100) |>
+  arrange(desc(percent_return)) |>
+  slice(1:10) |>
+  ggplot(aes(x = reorder(`COUNTY NAME`, percent_return), y = percent_return)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Top 10 Maryland Counties by Percentage of Absentee Ballots Returned",
+    y = "Percent of Absentee Ballots Returned",
+    x = "County",
+    caption = "Source: Maryland State Board of Elections"
+  )
+
 
 ```
 
@@ -65,6 +79,19 @@ md_ballots_date <- read_csv("data/md_absentee_ballots_date.csv")
 **A2.**
 
 ```{r}
+md_ballots |>
+  mutate(dem_percent_return = `DEM RECEIVED` / DEM_SENT * 100) |>
+  arrange(dem_percent_return) |>
+  slice(1:10) |>
+  ggplot(aes(x = reorder(`COUNTY NAME`, dem_percent_return), y = dem_percent_return)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Top 10 Maryland Counties by Percent of Absentee Ballots Returned by Democrats",
+    y = "Percent of Absentee Ballots Returned by Democrats",
+    x = "County",
+    caption = "Source: Maryland State Board of Elections"
+  )
 
 ```
 **Q3** Let's make a line chart using the second set of absentee ballot data - this one tracking returns by date. We want to see received ballots for Frederick County for Democrats, Republicans and Others, so you'll make a chart with three lines, adding color to each one (you can choose, but choose sensibly). Give the chart a title and good labels. What's the story that this line chart tells? Compare and contrast the three lines. Does it match what you know about absentee voting habits?
@@ -72,7 +99,18 @@ md_ballots_date <- read_csv("data/md_absentee_ballots_date.csv")
 **A3** 
 
 ```{r}
-
+md_ballots_date |>
+  filter(`COUNTY NAME` == "FREDERICK") |>
+  ggplot() +
+  geom_line(aes(x = date, y = `DEM RECEIVED`), color = "blue") +
+  geom_line(aes(x = date, y = `REP RECEIVED`), color = "red") +
+  geom_line(aes(x = date, y = `OTH RECEIVED`), color = "black") +
+  labs(
+    title = "Absentee Ballot Returns Over Time in Frederick County",
+    x = "Date",
+    y = "Number of Ballots Received",
+    caption = "Source: Maryland State Board of Elections"
+  )
 ```
 
 **Q4.** A scatterplot is a type of chart that helps us see relationships between two variables. One variable goes on the x axis, the other on the y axis. For each row/observation in our data, a scatterplot puts a circle (or a "point") where the two variables intersect on a grid.
@@ -96,6 +134,19 @@ Follow these steps:
 **A4.** 
 
 ```{r}
+
+install.packages("ggrepel")  
+
+library(ggrepel)
+
+md_ballots_date |>
+  ggplot() +
+  geom_point(aes(x = `TOTAL SENT`, y = `TOTAL RECEIVED`)) +
+  geom_text_repel(aes(x = `TOTAL SENT`, y = `TOTAL RECEIVED`, label = `COUNTY NAME`),
+                  max.overlaps = Inf,
+                  size = 3,
+                  box.padding = 0.5) +
+  geom_smooth(aes(x = `TOTAL SENT`, y = `TOTAL RECEIVED`))  
 
   
 ```
