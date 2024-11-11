@@ -1,0 +1,42 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# Turn off scientific notation
+options(scipen=999)
+
+# Load libraries
+library(tidyverse)
+library(tidycensus)
+library(lubridate)
+library(janitor)
+
+```
+
+
+```{r}
+Early_Voting_Data <- read.csv("data/EarlyVoting_data.csv")
+
+Early_Voting_Data
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
