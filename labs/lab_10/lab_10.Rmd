@@ -30,6 +30,7 @@ library(tidycensus)
 library(lubridate)
 library(janitor)
 library(ggplot2)
+install.packages("ggalt")
 
 ```
 
@@ -39,12 +40,31 @@ Let's explore the election results from last night and make some maps!
 
 **Q1.** Make a county-level map of Maryland's results for U.S. Senate using `md_senate_county_24.csv` in the data folder, calculating the difference between Angela Alsobrooks's percentage of the total votes and Larry Hogan's percentage of the total votes and displaying that percentage difference on the map. What is the story here, and what is the county with the most interesting results?
 
-**A1.**
+**The map shows Maryland's political divides, with urban counties showing support for Alsobrooks, while rural areas lean more towards Hogan. The most interesting county would be the one little yellow spec inside a big red county.**
 
 ```{r}
-md_senate_county <- read.csv("data/md_senate_county_24.csv")
 
-md_senate_county
+md_senate <- read_csv("data/md_senate_county_24.csv") |> 
+  clean_names() |> 
+  mutate(geoid = as.character(geoid),
+         total_votes = alsobrooks + hogan + scott,
+         percent_alsobrooks = alsobrooks/total_votes*100,
+         percent_hogan = hogan/total_votes*100,
+         percent_scott = scott/total_votes*100,
+         difference = percent_alsobrooks - percent_hogan
+         )
+
+md_counties_map <- tigris::counties(state = "MD") |> 
+  clean_names() |> 
+  mutate(geoid = as.character(geoid))
+
+md_senate_map <- md_counties_map |> 
+  inner_join(md_senate)
+
+md_senate_map |>
+  ggplot() +
+  scale_fill_viridis_b(option = "magma") +
+  geom_sf(aes(fill=difference))
 
 ```
 
@@ -55,34 +75,23 @@ Also answer this: is a map the best way to present this data? What else could yo
 **This map is supposed to show the difference in support between Trump and Hogan in 2024.**
 
 ```{r}
-md_pres_pct <- read_csv("data/md_pres_county_24.csv") |>
-  mutate(
-    GEOID = as.character(GEOID),
-    total = Harris + Trump + Oliver + Stein + Kennedy,
-    trump_pct = Trump / total * 100
-  )
+md_president <- read_csv("data/md_pres_county_24.csv") |> 
+  adorn_totals("col") |> 
+  as.data.frame() |> 
+  clean_names() |> 
+  mutate(percent_trump = trump/total*100,
+         geoid = as.character(geoid)) |> 
+  select(geoid, county, percent_trump)
 
-md_by_county_24 <- read_csv("data/md_pres_county_24.csv") |>
-  mutate(
-    GEOID = as.character(GEOID),
-    hogan_pct = Hogan / total * 100
-  )
+md_president_map <- md_senate_map |> 
+  select(geoid, county, percent_hogan, geometry) |> 
+  left_join(md_president) |> 
+  mutate(hogan_difference = percent_hogan - percent_trump)
 
-diff_county_trump <- md_by_county_24 |>
-  inner_join(md_pres_pct, by = "GEOID")
-
-trump_hogan_diff <- diff_county_trump |>
-  mutate(rep_diff = hogan_pct - trump_pct)
-
-md_counties <- counties |>
-  filter(STATEFP == "24") |>
-  left_join(trump_hogan_diff, by = "GEOID")
-
-md_counties |>
+md_president_map |> 
   ggplot() +
-  geom_sf(aes(fill = rep_diff)) +
-  theme_minimal() +
-  labs(fill = "Trump-Hogan Difference")
+  scale_fill_viridis_b(option="magma") +
+  geom_sf(aes(fill=hogan_difference))
 
 ```
 
@@ -91,25 +100,24 @@ md_counties |>
 **This map compares Hogan’s 2024 performance with 2018, showing where his support has increased or decreased over time.**
 
 ```{r}
-md_hogan_2018 <- read_csv("data/md_gov_county_18.csv") |>
-  mutate(
-    GEOID = as.character(GEOID),
-    hogan_2018_pct = Hogan / total_votes * 100
-  )
+md_governor_2018 <- read_csv("data/md_gov_county_18.csv") |> 
+  adorn_totals("col") |> 
+  as.data.frame() |> 
+  clean_names() |> 
+  mutate(geoid = as.character(geoid),
+         percent_hogan_2018 = hogan / total * 100
+         ) |> 
+  select(geoid, county, percent_hogan_2018)
 
-hogan_diff <- trump_hogan_diff |>
-  inner_join(md_hogan_2018, by = "GEOID") |>
-  mutate(hogan_diff_18_24 = hogan_pct - hogan_2018_pct)
+md_senate_gov_map <- md_senate_map |> 
+  select(geoid, county, percent_hogan, geometry) |> 
+  rename(percent_hogan_2024 = percent_hogan) |> 
+  left_join(md_governor_2018, by = "geoid") |> 
+  mutate(hogan_2024_difference = percent_hogan_2024 - percent_hogan_2018)
 
-md_counties <- counties |>
-  filter(STATEFP == "24") |>
-  left_join(hogan_diff, by = "GEOID")
-
-md_counties |>
+md_senate_gov_map |> 
   ggplot() +
-  geom_sf(aes(fill = hogan_diff_18_24)) +
-  theme_minimal() +
-  labs(fill = "Hogan 2018-2024 Difference")
+  geom_sf(aes(fill = hogan_2024_difference, geometry = geometry))
 
 ```
 
@@ -118,6 +126,29 @@ md_counties |>
 **A4.**
 
 ```{r}
+md_senate <- read_csv("data/md_senate_county_24.csv") |> 
+  clean_names() |> 
+  mutate(geoid = as.character(geoid),
+         total_votes = alsobrooks + hogan + scott,
+         percent_hogan = hogan / total_votes * 100)
+
+md_president <- read_csv("data/md_pres_county_24.csv") |> 
+  clean_names() |> 
+  mutate(geoid = as.character(geoid),
+         percent_trump = trump / (trump + other) * 100)
+
+
+md_map <- md_counties_map |> 
+  left_join(md_senate, by = "geoid") |> 
+  left_join(md_president, by = "geoid") |> 
+  mutate(hogan_trump_diff = percent_hogan - percent_trump)
+
+md_map |> 
+  ggplot() +
+  geom_sf(aes(fill = hogan_trump_diff), color = NA) +
+  scale_fill_viridis_c() +
+  labs(title = "Difference in Support: Hogan (Senate) vs. Trump (Presidential)", fill=difference)
+
 
 ```
 
