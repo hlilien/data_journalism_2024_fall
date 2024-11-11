@@ -22,11 +22,14 @@ knitr::opts_chunk$set(echo = TRUE)
 # Turn off scientific notation
 options(scipen=999)
 
+install.packages("tidyverse")
+
 # Load libraries
 library(tidyverse)
 library(tidycensus)
 library(lubridate)
 library(janitor)
+library(ggplot2)
 
 ```
 
@@ -49,16 +52,65 @@ md_senate_county
 
 Also answer this: is a map the best way to present this data? What else could you make that might convey more information?
 
-**A2.**
+**This map is supposed to show the difference in support between Trump and Hogan in 2024.**
 
 ```{r}
+md_pres_pct <- read_csv("data/md_pres_county_24.csv") |>
+  mutate(
+    GEOID = as.character(GEOID),
+    total = Harris + Trump + Oliver + Stein + Kennedy,
+    trump_pct = Trump / total * 100
+  )
+
+md_by_county_24 <- read_csv("data/md_pres_county_24.csv") |>
+  mutate(
+    GEOID = as.character(GEOID),
+    hogan_pct = Hogan / total * 100
+  )
+
+diff_county_trump <- md_by_county_24 |>
+  inner_join(md_pres_pct, by = "GEOID")
+
+trump_hogan_diff <- diff_county_trump |>
+  mutate(rep_diff = hogan_pct - trump_pct)
+
+md_counties <- counties |>
+  filter(STATEFP == "24") |>
+  left_join(trump_hogan_diff, by = "GEOID")
+
+md_counties |>
+  ggplot() +
+  geom_sf(aes(fill = rep_diff)) +
+  theme_minimal() +
+  labs(fill = "Trump-Hogan Difference")
+
 ```
 
 **Q3** Make another map showing the difference between Larry Hogan's county-level performance this year and from his governor race in 2018, using percentages to compare the two as you did in Q2. You can use the dataframe you initially loaded for Q1, and you'll need to load the 2018 governor results in the data folder and join them to it before proceeding. Are there any counties where Hogan did better this year? How would you describe the map showing the difference?
 
-**A3**
+**This map compares Hogan’s 2024 performance with 2018, showing where his support has increased or decreased over time.**
 
 ```{r}
+md_hogan_2018 <- read_csv("data/md_gov_county_18.csv") |>
+  mutate(
+    GEOID = as.character(GEOID),
+    hogan_2018_pct = Hogan / total_votes * 100
+  )
+
+hogan_diff <- trump_hogan_diff |>
+  inner_join(md_hogan_2018, by = "GEOID") |>
+  mutate(hogan_diff_18_24 = hogan_pct - hogan_2018_pct)
+
+md_counties <- counties |>
+  filter(STATEFP == "24") |>
+  left_join(hogan_diff, by = "GEOID")
+
+md_counties |>
+  ggplot() +
+  geom_sf(aes(fill = hogan_diff_18_24)) +
+  theme_minimal() +
+  labs(fill = "Hogan 2018-2024 Difference")
+
 ```
 
 **Q4.** Choose your own map adventure! In the data folder I've included Maryland county-level results for the abortion rights amendment vote this year, plus the 2020 presidential results by county and 2022 governor's results by county. Using one of those and at least one other contest for comparison, make a county-level map showing what you think is the most interesting aspect of that data, and describe the results in terms of a possible story. You can bring in other data, such as Census information, if you like.
