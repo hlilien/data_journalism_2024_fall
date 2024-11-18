@@ -18,7 +18,10 @@ knitr::opts_chunk$set(echo = TRUE)
 **Task** Create a codeblock and load appropriate packages and settings for this lab.
 
 ```{r}
-
+library(rvest)
+library(tidyverse)
+library(janitor)
+library(ggplot2)
 ```
 
 Let's get to scraping. We'll be working on collecting information about Maryland election results, and then we'll grab some congressional press releases. For Maryland races, we'll focus on Board of Education races using this CNS story as a guide: <https://cnsmaryland.org/2024/11/08/md-conservatives-make-gains-in-school-board-races/>. You should read it.
@@ -30,6 +33,23 @@ Let's get to scraping. We'll be working on collecting information about Maryland
 **A1**
 
 ```{r}
+url <- 'https://elections.maryland.gov/elections/2024/general_Results/gen_results_2024_by_county_11.html'
+
+results <- read_html(url) |>
+  html_table()
+
+boe_results <- results[[9]]
+
+boe_results |>
+  clean_names() |>
+  slice(-9) |>
+  mutate(
+    early_voting = as.numeric(str_remove(early_voting, ",")),
+    election_day = as.numeric(str_remove(early_voting, ",")),
+    mail_in_ballot = as.numeric(str_remove(early_voting, ",")),
+    provisional = as.numeric(str_remove(early_voting, ",")),
+    total = as.numeric(str_remove(early_voting, ",")),
+  )
 
 ```
 
@@ -42,6 +62,17 @@ Then, write code that finds the most recent release with the word "Campaign" in 
 **A2**
 
 ```{r}
+results <- 'https://www.cardin.senate.gov/?post_type=press-releases' |>
+  read_html() |>
+  html_elements("article a")
+
+tibble(
+  title = results |> html_text(trim = TRUE),
+  url = results |> html_attr("href")
+) |>
+  separate(title, c("date", "title"), ": ") |>
+  filter(date != "Read the Rest....") |>
+  filter(str_detect(title, "campaign|Campaign"))
 
 ```
 
