@@ -54,8 +54,9 @@ Also the three counties with the highest percentage of early voters, all fell in
 #3Calvert	Unemploymet 3.180552		early voter 33.65	
 #5 Queen Anne's	Unemploymet 3.633084		early voter 33.87	
 
-#Question 4: 
-#How does early voting turnout correlate with registered party affiliation across Maryland counties? 
+#Question 4: How does early voting turnout correlate with registered party affiliation across Maryland counties? 
+
+#Answer 4:
 
 ```{r}
 early_voting_2024 |>
@@ -80,10 +81,9 @@ early_voting_2024 |>
 
 ```
 
-#Question 3: 
-#Are certain counties turning out in higher numbers for early voting compared to previous elections? 
+#Question 3: Are certain counties turning out in higher numbers for early voting compared to previous elections? 
 
-#A
+#Answer 3: 
 ```{r}
 #For each year, I cleaned the data, made the percent total number a DBL and renamed the percent total to its respective year. I selected only the county and the total percent of eligible voters who voter early. For this question, the total number of voters on any given day was not needed. 
 county_2024 <- 
@@ -136,7 +136,7 @@ q_3_final <-
 
 #Question 1: What is the percentage change of early voters from an election prior to covid (or 2020) to after covid? 
 
-#Answer: This is quite similar to question three. You can look at the percent change for each county, but here is the total percent change 
+#Answer 1: This is quite similar to question three. You can look at the percent change for each county, but here is the total percent change 
 
 ```{r}
 total_percent_changes <- q_3_final |>
@@ -149,8 +149,9 @@ total_percent_changes <- q_3_final |>
 total_percent_changes
 ```
 
-#Question 5 
-#How do economic factors like median income and unemployment rates impact early voter turnout across Maryland counties? 
+#Question 5: How do economic factors like median income and unemployment rates impact early voter turnout across Maryland counties?
+
+#Answer 5: 
 
 ```{r}
 
