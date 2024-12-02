@@ -218,19 +218,16 @@ q_5_final
 #Answer 2: Counties with more eligible voters tend to have higher early voting turnout. Demographics like income, unemployment, and party affiliation also explain differences between counties.
 
 ```{r}
-# Clean names and calculate proportion
+# Calculate proportion and correlation
 early_voting <- county_2024 |> 
   clean_names() |> 
-  mutate(proportion_eligible_voters = total__voters / population * 100)
+  mutate(proportion = total_voters / population * 100)
 
-# Calculate simple correlation
-correlation <- cor(early_voting$proportion_eligible_voters, early_voting$percent_total, use = "complete.obs")
-print(correlation)
-
-# Quick summary of demographics
+# Summarize key demographics
 summary <- early_voting |> 
   select(county_name, median_income, unemployment_rate, percent_total) |> 
-  arrange(desc(percent_total))
+  arrange(-percent_total)
 
 print(summary)
+
 ```
