@@ -63,10 +63,16 @@ print(top_trigrams)
 **This tracks how often the top three-word phrases appears each fiscal year, showing trends over time.**
 
 ```{r}
-trigram_by_year <- attorneysaction_data |>
-  unnest_tokens(trigram, text, token = "ngrams", n = 3) |>
-  filter(trigram == top_trigram) |>
-  count(fiscal_year)
+sanctions <- sanctions |> 
+  mutate(year = fiscal_year)
+top_trigram <- "attorney trust account"
 
-print(trigram_by_year)
+trigram_by_year <- sanctions |> 
+  filter(str_detect(text, top_trigram)) |> 
+  group_by(fiscal_year) |> 
+  summarise(count = n()) |>
+  arrange(desc(count))
+
+  
+trigram_by_year
 ```
