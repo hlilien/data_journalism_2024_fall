@@ -9,13 +9,13 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 # Turn off scientific notation
 options(scipen=999)
 
-# Load the tidyverse. If you have not installed the tidyverse already, remove the # from the next line and run it first.  
-# install.packages('tidyverse')
 library(tidyverse)
 library(tidytext)
 library(janitor)
 library(lubridate)
 library(tidycensus)
+library(dplyr)
+library(stringr)
 ```
 
 ```{r echo=FALSE}
@@ -23,7 +23,6 @@ census_api_key("03183f1d7157fca8529a26898cff8c1b802565ed", install = TRUE, overw
 ```
 
 ```{r}
-#loads in the core data sets needed, as well as some more specific, cleaned data focusing on county leve data
 
 county_2024 <- read_csv("data/earlyvote_county_24.csv")
 county_2020 <- read_csv("data/earlyvote_county_20.csv")
