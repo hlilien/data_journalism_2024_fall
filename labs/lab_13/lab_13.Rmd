@@ -37,7 +37,7 @@ Let's start with the 2022 results. You'll need to locate and scrape the 2022 cou
 **Task** Scrape the county-level results for the U.S. Senate race in 2022, which can be found at https://electionresults.utah.gov/elections/, into a dataframe. You will need to make sure that you have clean headers, which may involve renaming them, and you will need to remove the total row. Make sure that the columns containing votes are numeric.
 
 ```{r}
-ut_elec_2022 <- read_csv("2022_election_utah.csv")
+ut_elec_2022 <- read_csv("data/2022_election_utah.csv")
 
 ut_elec_2022 <- data.frame(
   x1 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
@@ -77,7 +77,7 @@ Next, we'll get the 2018 results. Unlike the 2022 results, these are stored in a
 **Task** Get the county-level results for the U.S. Senate race in 2018, which can be found at https://elections.utah.gov/Media/Default/2018%20Election/2018%20General%20Election%20Canvass.xlsx, and turn them into a dataframe. You will need to make sure that you have clean headers, which may involve renaming them, and you will need to remove the total row. Make sure that the columns containing votes are numeric.
 
 ```{r}
-ut_elec_2018 <- read_excel("2018-General-Election-Canvass-1.xlsx", sheet = 2)
+ut_elec_2018 <- read_excel("data/2018-General-Election-Canvass-1.xlsx", sheet = 2)
 
 ut_elec_2018 <- tibble(
   County = c("Beaver", "Box Elder", "Cache", "Carbon", "Daggett", "Davis", "Duchesne", "Emery", "Garfield", 
@@ -132,7 +132,7 @@ ut_elect_18_20
 **Evan McMullin seems to have dominated Jenny Wilson, winning Utah, Salt Lake, and Davis counties, the three largest in the state. He only lost one of 29 counties (San Juan). Despite Salt Lake being the largest, McMullin had a bigger vote margin in Utah County, winning by 43,382 votes.** 
 
 ```{r}
-ut_elect_18_20 <- ut_elect_18_20 |>
+ut_elect_18_20 <- ut_elec_2018 |>
   mutate(mcmullin_wilson_diff=clean_Evan_McMullin-Jenny_Wilson_DEM
 ) |>
   arrange(desc(mcmullin_wilson_diff))
@@ -163,8 +163,22 @@ When you're done, rename the columns so they make sense, then make sure the date
 
 Finally, tell me what questions you could ask of this data. Be creative.
 
-**A3** 
+**How often does Sen. Ben Cardin post press releases? Do press releases follow any specific patterns or trends?** 
 
 ```{r}
+ben_press_url <- "https://www.cardin.senate.gov/?post_type=press-releases"
+
+ben_press_releases <- ben_press_url |>
+  read_html() |>
+  html_elements('h3 a')
+
+dates <- ben_press_url |>
+  read_html() |>
+  html_elements('h5 a')
+  
+  
+ben_release_date <- tibble(
+  date=mdy(html_text(dates))
+)
 
 ```
