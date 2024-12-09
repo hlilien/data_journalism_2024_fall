@@ -84,7 +84,7 @@ early_voting_2024 |>
 #Answer 3: Calvert County saw a big jump in early voting, increasing by 60% from 2020 to 2024, while Washington County wasn’t far behind with a 40% rise. Washington County stands out even more with a 100% increase in early voting since 2016, showing how much things have changed over the years. This growth could be driven by efforts to make early voting easier or simply more interest in getting involved.
 
 ```{r}
-#For each year, I cleaned the data, made the percent total number a DBL and renamed the percent total to its respective year. I selected only the county and the total percent of eligible voters who voter early. For this question, the total number of voters on any given day was not needed. 
+#For each year, I cleaned the data, converted percentages to numeric, renamed the column for the year, and selected only the county name and early voting percentage. Daily voter totals were not needed.
 
 county_2024 <- 
   county_2024 |> 
@@ -110,12 +110,12 @@ county_2016 <-
   rename(percent_total_16 = percent_total) |> 
   arrange(desc(percent_total_16))
 
-# next I combined the three datasets into one, called Question three final. 
+#combined the three datasets into one, called Question three final. 
 q_3_final <- county_2024 |> 
   left_join(county_2020_clean, by = "county_name") |> 
   left_join(county_2016, by = "county_name")
 
-#here I create three new columns to show the three different possible percent changes. (16 to 20, 16 to 24 and 20 to 24.)
+#created three new columns to show the three different possible percent changes. (16 to 20, 16 to 24 and 20 to 24.)
 q_3_final <-
   q_3_final |>
   mutate( 
@@ -129,8 +129,7 @@ q_3_final <-
   
   q_3_final
   
-#this final table, depending on how you arrange, will answer question  3. From 2020 to 2024 there are two counties experiencing a major increase of the total percent of eligible voters who voted early. Calvert (nearly 60% change) and Washington (40% change). Washington County is quite interesting, as it has the highest net increase, as from 2016 to 2024, it's percentage of early voters increase by almost exactly 100%. 
-
+#Depending on how you arrange it, this final table answers question 3. From 2020 to 2024, two counties stand out with a big jump in early voting percentages: Calvert, with nearly a 60% increase, and Washington, with a 40% increase. Washington County is especially interesting because its early voter percentage has almost doubled from 2016 to 2024, showing a 100% increase.
 ```
 
 #Question 1: What is the percentage change of early voters from an election prior to covid (or 2020) to after covid? 
