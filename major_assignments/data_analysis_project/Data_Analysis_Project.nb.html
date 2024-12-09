@@ -1784,36 +1784,33 @@ library(stringr)</code></pre>
 <pre class="r"><code># Load the datasets
 county_2024 &lt;- read_csv(&quot;data/earlyvote_county_24.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogT25lIG9yIG1vcmUgcGFyc2luZyBpc3N1ZXMsIGNhbGwgYHByb2JsZW1zKClgIG9uIHlvdXIgZGF0YSBmcmFtZSBmb3IgZGV0YWlscywgZS5nLjpcbiAgZGF0IDwtIHZyb29tKC4uLilcbiAgcHJvYmxlbXMoZGF0KVJvd3M6IDM1NSBDb2x1bW5zOiAx4pSA4pSAIENvbHVtbiBzcGVjaWZpY2F0aW9uIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICgxKTogJVBERi0xLjNcbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)Rows: 355 Columns: 1── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMjUgQ29sdW1uczogMjDilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDEwKTogQ291bnR5IE5hbWUsICVEYXkxLCAlRGF5MiwgJURheTMsICVEYXk0LCAlRGF5NSwgJURheTYsICVEYXk3LCAlRGF5OCwgJVRvdGFsXG5udW0gKDEwKTogREFZMSwgREFZMiwgREFZMywgREFZNCwgREFZNSwgREFZNiwgREFZNywgREFZOCwgVE9UQUwsIEVsaWdpYmxlIEFjdGl2ZXNcbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
+<pre><code>Rows: 25 Columns: 20── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
-chr (1): %PDF-1.3
+chr (10): County Name, %Day1, %Day2, %Day3, %Day4, %Day5, %Day6, %Day7, %Day8, %Total
+num (10): DAY1, DAY2, DAY3, DAY4, DAY5, DAY6, DAY7, DAY8, TOTAL, Eligible Actives
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY291bnR5XzIwMjAgPC0gcmVhZF9jc3YoXCJkYXRhL2Vhcmx5dm90ZV9jb3VudHlfMjAuY3N2XCIpXG5gYGAifQ== -->
 <pre class="r"><code>county_2020 &lt;- read_csv(&quot;data/earlyvote_county_20.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogT25lIG9yIG1vcmUgcGFyc2luZyBpc3N1ZXMsIGNhbGwgYHByb2JsZW1zKClgIG9uIHlvdXIgZGF0YSBmcmFtZSBmb3IgZGV0YWlscywgZS5nLjpcbiAgZGF0IDwtIHZyb29tKC4uLilcbiAgcHJvYmxlbXMoZGF0KVJvd3M6IDMyMiBDb2x1bW5zOiAx4pSA4pSAIENvbHVtbiBzcGVjaWZpY2F0aW9uIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICgxKTogJVBERi0xLjNcbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)Rows: 322 Columns: 1── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMjUgQ29sdW1uczogMjDilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDEwKTogQ291bnR5LCAlRGF5MSwgJURheTIsICVEYXkzLCAlRGF5NCwgJURheTUsICVEYXk2LCAlRGF5NywgJURheTgsICUgVE9UQUxcbm51bSAoMTApOiBEQVkxLCBEQVkyLCBEQVkzLCBEQVk0LCBEQVk1LCBEQVk2LCBEQVk3LCBEQVk4LCBUT1RBTCwgRWxpZ2libGUgQWN0aXZlc1xu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 25 Columns: 20── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
-chr (1): %PDF-1.3
+chr (10): County, %Day1, %Day2, %Day3, %Day4, %Day5, %Day6, %Day7, %Day8, % TOTAL
+num (10): DAY1, DAY2, DAY3, DAY4, DAY5, DAY6, DAY7, DAY8, TOTAL, Eligible Actives
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY291bnR5XzIwMTYgPC0gcmVhZF9jc3YoXCJkYXRhL2Vhcmx5dm90ZV9jb3VudHlfMTYuY3N2XCIpXG5gYGAifQ== -->
 <pre class="r"><code>county_2016 &lt;- read_csv(&quot;data/earlyvote_county_16.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogT25lIG9yIG1vcmUgcGFyc2luZyBpc3N1ZXMsIGNhbGwgYHByb2JsZW1zKClgIG9uIHlvdXIgZGF0YSBmcmFtZSBmb3IgZGV0YWlscywgZS5nLjpcbiAgZGF0IDwtIHZyb29tKC4uLilcbiAgcHJvYmxlbXMoZGF0KVJvd3M6IDM0MSBDb2x1bW5zOiAx4pSA4pSAIENvbHVtbiBzcGVjaWZpY2F0aW9uIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgFxuRGVsaW1pdGVyOiBcIixcIlxuY2hyICgxKTogJVBERi0xLjNcbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)Rows: 341 Columns: 1── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMjUgQ29sdW1uczogMjDilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDEwKTogQ291bnR5IE5hbWUsICVEYXkxLCAlRGF5MiwgJURheTMsICVEYXk0LCAlRGF5NSwgJURheTYsICVEYXk3LCAlRGF5OCwgJVRvdGFsXG5udW0gKDEwKTogREFZMSwgREFZMiwgREFZMywgREFZNCwgREFZNSwgREFZNiwgREFZNywgREFZOCwgVE9UQUwsIEVsaWdpYmxlIEFjdGl2ZXNcbuKEuSBVc2UgYHNwZWMoKWAgdG8gcmV0cmlldmUgdGhlIGZ1bGwgY29sdW1uIHNwZWNpZmljYXRpb24gZm9yIHRoaXMgZGF0YS5cbuKEuSBTcGVjaWZ5IHRoZSBjb2x1bW4gdHlwZXMgb3Igc2V0IGBzaG93X2NvbF90eXBlcyA9IEZBTFNFYCB0byBxdWlldCB0aGlzIG1lc3NhZ2UuXG4ifQ== -->
+<pre><code>Rows: 25 Columns: 20── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
-chr (1): %PDF-1.3
+chr (10): County Name, %Day1, %Day2, %Day3, %Day4, %Day5, %Day6, %Day7, %Day8, %Total
+num (10): DAY1, DAY2, DAY3, DAY4, DAY5, DAY6, DAY7, DAY8, TOTAL, Eligible Actives
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
@@ -1942,7 +1939,7 @@ the years. This growth could be driven by efforts to make early voting
 easier or simply more interest in getting involved.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0ZvciBlYWNoIHllYXIsIEkgY2xlYW5lZCB0aGUgZGF0YSwgbWFkZSB0aGUgcGVyY2VudCB0b3RhbCBudW1iZXIgYSBEQkwgYW5kIHJlbmFtZWQgdGhlIHBlcmNlbnQgdG90YWwgdG8gaXRzIHJlc3BlY3RpdmUgeWVhci4gSSBzZWxlY3RlZCBvbmx5IHRoZSBjb3VudHkgYW5kIHRoZSB0b3RhbCBwZXJjZW50IG9mIGVsaWdpYmxlIHZvdGVycyB3aG8gdm90ZXIgZWFybHkuIEZvciB0aGlzIHF1ZXN0aW9uLCB0aGUgdG90YWwgbnVtYmVyIG9mIHZvdGVycyBvbiBhbnkgZ2l2ZW4gZGF5IHdhcyBub3QgbmVlZGVkLiBcblxuY291bnR5XzIwMjQgPC0gXG4gIGNvdW50eV8yMDI0IHw+IFxuICBjbGVhbl9uYW1lcygpIHw+IFxuICBzZWxlY3QoY291bnR5X25hbWUsIHBlcmNlbnRfdG90YWwpIHw+IFxuICBtdXRhdGUocGVyY2VudF90b3RhbCA9IGFzLm51bWVyaWMoc3RyX3JlcGxhY2UocGVyY2VudF90b3RhbCwgXCIlXCIsIFwiXCIpKSkgfD4gXG4gIHJlbmFtZShwZXJjZW50X3RvdGFsXzI0ID0gcGVyY2VudF90b3RhbCkgfD4gXG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X3RvdGFsXzI0KSkgXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0ZvciBlYWNoIHllYXIsIEkgY2xlYW5lZCB0aGUgZGF0YSwgbWFkZSB0aGUgcGVyY2VudCB0b3RhbCBudW1iZXIgYSBEQkwgYW5kIHJlbmFtZWQgdGhlIHBlcmNlbnQgdG90YWwgdG8gaXRzIHJlc3BlY3RpdmUgeWVhci4gSSBzZWxlY3RlZCBvbmx5IHRoZSBjb3VudHkgYW5kIHRoZSB0b3RhbCBwZXJjZW50IG9mIGVsaWdpYmxlIHZvdGVycyB3aG8gdm90ZXIgZWFybHkuIEZvciB0aGlzIHF1ZXN0aW9uLCB0aGUgdG90YWwgbnVtYmVyIG9mIHZvdGVycyBvbiBhbnkgZ2l2ZW4gZGF5IHdhcyBub3QgbmVlZGVkLiBcblxuY291bnR5XzIwMjQgPC0gXG4gIGNvdW50eV8yMDI0IHw+IFxuICBjbGVhbl9uYW1lcygpIHw+IFxuICBzZWxlY3QoY291bnR5X25hbWUsIHBlcmNlbnRfdG90YWwpIHw+IFxuICBtdXRhdGUocGVyY2VudF90b3RhbCA9IGFzLm51bWVyaWMoc3RyX3JlcGxhY2UocGVyY2VudF90b3RhbCwgXCIlXCIsIFwiXCIpKSkgfD4gXG4gIHJlbmFtZShwZXJjZW50X3RvdGFsXzI0ID0gcGVyY2VudF90b3RhbCkgfD4gXG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X3RvdGFsXzI0KSkgXG5cbmNvdW50eV8yMDIwX2NsZWFuIDwtIFxuICBjb3VudHlfMjAyMCB8PiBcbiAgY2xlYW5fbmFtZXMoKSB8PiBcbiAgc2VsZWN0KGNvdW50eSwgcGVyY2VudF90b3RhbCkgfD4gXG4gIG11dGF0ZShwZXJjZW50X3RvdGFsID0gYXMubnVtZXJpYyhzdHJfcmVwbGFjZShwZXJjZW50X3RvdGFsLCBcIiVcIiwgXCJcIikpKSB8PiBcbiAgcmVuYW1lKHBlcmNlbnRfdG90YWxfMjAgPSBwZXJjZW50X3RvdGFsLCBjb3VudHlfbmFtZSA9IGNvdW50eSkgfD4gXG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X3RvdGFsXzIwKSlcblxuY291bnR5XzIwMTYgPC0gXG4gIGNvdW50eV8yMDE2IHw+IFxuICBjbGVhbl9uYW1lcygpIHw+IFxuICBzZWxlY3QoY291bnR5X25hbWUsIHBlcmNlbnRfdG90YWwpIHw+IFxuICBtdXRhdGUocGVyY2VudF90b3RhbCA9IGFzLm51bWVyaWMoc3RyX3JlcGxhY2UocGVyY2VudF90b3RhbCwgXCIlXCIsIFwiXCIpKSkgfD4gXG4gIHJlbmFtZShwZXJjZW50X3RvdGFsXzE2ID0gcGVyY2VudF90b3RhbCkgfD4gXG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X3RvdGFsXzE2KSlcblxuIyBuZXh0IEkgY29tYmluZWQgdGhlIHRocmVlIGRhdGFzZXRzIGludG8gb25lLCBjYWxsZWQgUXVlc3Rpb24gdGhyZWUgZmluYWwuIFxucV8zX2ZpbmFsIDwtIGNvdW50eV8yMDI0IHw+IFxuICBsZWZ0X2pvaW4oY291bnR5XzIwMjBfY2xlYW4sIGJ5ID0gXCJjb3VudHlfbmFtZVwiKSB8PiBcbiAgbGVmdF9qb2luKGNvdW50eV8yMDE2LCBieSA9IFwiY291bnR5X25hbWVcIilcblxuI2hlcmUgSSBjcmVhdGUgdGhyZWUgbmV3IGNvbHVtbnMgdG8gc2hvdyB0aGUgdGhyZWUgZGlmZmVyZW50IHBvc3NpYmxlIHBlcmNlbnQgY2hhbmdlcy4gKDE2IHRvIDIwLCAxNiB0byAyNCBhbmQgMjAgdG8gMjQuKVxucV8zX2ZpbmFsIDwtXG4gIHFfM19maW5hbCB8PlxuICBtdXRhdGUoIFxuICAgIHBlcmNlbnRfY2hhbmdlXzI0XzIwID0gKChwZXJjZW50X3RvdGFsXzI0IC0gcGVyY2VudF90b3RhbF8yMCkgLyBwZXJjZW50X3RvdGFsXzIwKSAqIDEwMCkgfD5cbiAgbXV0YXRlKCBcbiAgICBwZXJjZW50X2NoYW5nZV8yNF8xNiA9ICAoKHBlcmNlbnRfdG90YWxfMjQgLSBwZXJjZW50X3RvdGFsXzE2KSAvIHBlcmNlbnRfdG90YWxfMTYpICogMTAwKSB8PlxuICBtdXRhdGUoIFxuICAgIHBlcmNlbnRfY2hhbmdlXzIwXzE2ID0gICgocGVyY2VudF90b3RhbF8yMCAtIHBlcmNlbnRfdG90YWxfMTYpIC8gcGVyY2VudF90b3RhbF8xNikgKiAxMDApIHw+XG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X2NoYW5nZV8yNF8xNikpXG4gIFxuICBcbiAgcV8zX2ZpbmFsXG5gYGAifQ== -->
 <pre class="r"><code>#For each year, I cleaned the data, made the percent total number a DBL and renamed the percent total to its respective year. I selected only the county and the total percent of eligible voters who voter early. For this question, the total number of voters on any given day was not needed. 
 
 county_2024 &lt;- 
@@ -1951,16 +1948,55 @@ county_2024 &lt;-
   select(county_name, percent_total) |&gt; 
   mutate(percent_total = as.numeric(str_replace(percent_total, &quot;%&quot;, &quot;&quot;))) |&gt; 
   rename(percent_total_24 = percent_total) |&gt; 
-  arrange(desc(percent_total_24)) </code></pre>
+  arrange(desc(percent_total_24)) 
+
+county_2020_clean &lt;- 
+  county_2020 |&gt; 
+  clean_names() |&gt; 
+  select(county, percent_total) |&gt; 
+  mutate(percent_total = as.numeric(str_replace(percent_total, &quot;%&quot;, &quot;&quot;))) |&gt; 
+  rename(percent_total_20 = percent_total, county_name = county) |&gt; 
+  arrange(desc(percent_total_20))
+
+county_2016 &lt;- 
+  county_2016 |&gt; 
+  clean_names() |&gt; 
+  select(county_name, percent_total) |&gt; 
+  mutate(percent_total = as.numeric(str_replace(percent_total, &quot;%&quot;, &quot;&quot;))) |&gt; 
+  rename(percent_total_16 = percent_total) |&gt; 
+  arrange(desc(percent_total_16))
+
+# next I combined the three datasets into one, called Question three final. 
+q_3_final &lt;- county_2024 |&gt; 
+  left_join(county_2020_clean, by = &quot;county_name&quot;) |&gt; 
+  left_join(county_2016, by = &quot;county_name&quot;)
+
+#here I create three new columns to show the three different possible percent changes. (16 to 20, 16 to 24 and 20 to 24.)
+q_3_final &lt;-
+  q_3_final |&gt;
+  mutate( 
+    percent_change_24_20 = ((percent_total_24 - percent_total_20) / percent_total_20) * 100) |&gt;
+  mutate( 
+    percent_change_24_16 =  ((percent_total_24 - percent_total_16) / percent_total_16) * 100) |&gt;
+  mutate( 
+    percent_change_20_16 =  ((percent_total_20 - percent_total_16) / percent_total_16) * 100) |&gt;
+  arrange(desc(percent_change_24_16))
+  
+  
+  q_3_final</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gYHNlbGVjdCgpYDpcbiEgQ2FuJ3Qgc2VsZWN0IGNvbHVtbnMgdGhhdCBkb24ndCBleGlzdC5cbuKcliBDb2x1bW4gYGNvdW50eV9uYW1lYCBkb2Vzbid0IGV4aXN0LlxuQmFja3RyYWNlOlxuIDEuIGRwbHlyOjphcnJhbmdlKC4uLilcbiA1LiBkcGx5cjo6OnNlbGVjdC5kYXRhLmZyYW1lKGNsZWFuX25hbWVzKGNvdW50eV8yMDI0KSwgY291bnR5X25hbWUsIHBlcmNlbnRfdG90YWwpXG4ifQ== -->
-<pre><code>Error in `select()`:
-! Can&#39;t select columns that don&#39;t exist.
-✖ Column `county_name` doesn&#39;t exist.
-Backtrace:
- 1. dplyr::arrange(...)
- 5. dplyr:::select.data.frame(clean_names(county_2024), county_name, percent_total)</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MjUsIm5jb2wiOjcsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMjUgw5cgNyJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEzVlZDVkFUVnhoZUNTRVFvZGdpS0JWdFZLd29WMExJQVFUOEU4Q0FpZ0tpU0VXZFRWaVNqTXN1THNHQTFBTUhadXFCYU91RnJRN2VkbFNxdGs2eHRiSkdaM1FVT2tPdDRrR3RGMVZycHpManFMU2RTbmZ6ZG9ObDlFMTI5djNmZjM3LzI3dy9QMk9lV2o1UGptR1lCUFAxSFlKSnBOd1drODRwbUJxcnh6QmZIMDRZZ3ZsaUFmeTdpak1LNFRZeTdobkdQZUdDUWw2SVY5Z2RsTTFKVXdMaWJ5Ukp3b1pUMVlJc1M4ZkpwUVRqRk1UQTJiaURjaXB5Y0taNllzV0FDY1BRSkNtSTBuVEM2aEFGbVpuVEVVN1IzWjh6cFVrSFJZaHlvY05LbDNHUEtNK215d2ltZ2hEdEE2WXlSQW5CT0t5THhZSXphTVpxSnlxY0JDTldaS1FvUW1Ga0txa1NRc3dhVU1oWnZXNGtTN2ZqREVsNEs4N0NtVkthS1JGRDVGVVNCS1hnQTNsSlNRdG1GUmhuQ0lMdmRJSVNTeHBtd2ttbm80eG1DRVU2WFVrNXhVYjVGZUNraFJhdDVEazA1YlR4Wkx6NkxOcUZlMU1HNXpJT3lrb296QVROMkFheXZ2TmFjQWNYbWtQNDA0S2tzZWFXNGN2dWduS2JQTFY4YnhmQUZUVy9ZTW9xL3N3eFNERTFGa2M5UHdkSm1XTmE4NTdVUTNMVWMzZGo4U1JJNG9ReHJmbWd2OFM3eVNHcGtvT2pYb0JPaXV3MHJSNEQwSGQ3SEVESEplRXlnVUhRRy83MEFBQlBpM2tEMEIwUzRoNG81UmRvaFR4UUtzajN1N2dDOTNuejZMOUFjU2UzODZ2RHkwY2wyR2tLRVI5Tk1JcWZzZ25WYXdERVN4Zk5pWGwvZ0ZtRmNPTXNaSmZheTdGSlhRTEdIWHk1TldDd0MzVzRVTHlVcjFGL1FJM2VhVUljMDNwUEhaQTV6ZE9QbGIxOEZ0a2VnSk5DWHhwUmZOTm0xQWQxQktvLytWL2VQQlUwU3BRM0Z2WEx5MmVTcDEwZndGZ2huL3BHRTdkMlFFSUw2cC9TaXZncWhmNnBoRHdKUW44VEJGbGRoYzRqZ1VLNFN1Q1ZHSWRrdGVjenlBSmRKK3BIRW82K2l6UTNPbit0NEpmVWgrTG9ScUIrR05OUWZmcHlWTDloT2VLVEl1UlZvZS9HeXlmREVINjJ4NUxEYWszNlNOY0xHK1E4a0o5ZzByZEJ6T3FGRXpmTTI4d0dCZ1RmWWpmMndqaEZUWnQvN1dNMnMrTkIzWmR0T2phNSs5bTRTZDk4eXFyVTFXbnV6NXZabEdNOTBWMmZwYkFKZlhmM2pOTFdzMGJwQXExc1Z6RWJXV3U1WDdTZllnM25uczAvV0x1Vmphak5QWDZqVThwcXBmVXhOd05KTnRHNU4yalU5TDByKzlENXNMb3A5N2I4M1A0ZU8rTDgvYllqNjl2WmlhNjhydlBMUGdMMWhkTTFGMDZ2WU1PT2RBYnVyQ0JBT2Q3ZGZMVFBsNDFjY2UvbzdjQVdMNThpNmNqSzBsUDNvREI1NktQNDVqYkl3eGRlV2xaM0ZmS2lwalZROFJNZ2QvUGFrSGUwaHlHN1M1SEIvU0RyNDB0UHc4Nk1CcmpqL2lIWWgvdS9YV3hJdmV4L0ZkTE9QYmJVekFrRi9jUGo3OE4zeDBCL3R2YmFKMjJuUWFkODJiekRWQTNxay92Mm45eTNHMVM3YnpaVmJXbUM2TC9XRVhjVTJSQ3AzOVpScWs2RjBLZHpvNXZNSFczUHZnMzZMV1orRHpzc3d1SlRUaWF5SVUyYittLzA1N1BoQ3pNYkVrNnNZaWRrbXVuVlQ3YXlFK3gyLzk5L21zRnE3UWMxdW1tTlhqNlp1dXUvdUFNdWdxWE85VzYzZVFtTXRFaHV1M3FYZ3ZueWdYRGRnak9RUDJMMDFVU0pBdExYdE1DYUZoT1UxTHZqTzR1U29hQjErN3FOZnN0aDVxR3B1M3JxeXFCQTgyaDcvZFlOTUQxa3Bsc1ozQWh6czVPSDM4MDRES2Jkdi9ybXhoeUVQRWw4aHlTK0haSVAxZG45bXdMQkhIYVpoUTB5U05kdWQxMFBtaVdlRHhpK3VuVnE4Ym9UZ0dWOS95R0Vwc0dZbDVPdlhCcy9tdFg4K0hmRHp1ZWoyZERnQld1enU1dFlYY1EvMFZWbjFXeDBlRkZZaTEvbm9ERWxwZkF5N281R0kwb21nRU90bmx0MkVhOFRyK0J5Z3J2ZUtlY2lKKzNFeVVVSmlXL0JsVy9HVlZvQkh5N2lWanRPMlFndTBJRFBHM1J2OTFQeXV2OXpDV0JvVjV6SUo0aDdmUGlydXIrLy8rRmcwbFlTcnhCSmk2QzhCSGZpY2FVTXp4bkRYZzF5a2RIbFRnZE5jVTQrL0ZEM0crUThoQmtFQkZkU2ZDVWxzVlo3SmJVNFZqTklMU21uYkh4T0Q0UldrTEFQZjIwdlExWDQ5QXZ1ZnVKZ0l5amJ3RVNYa3JqRk80Y2xKY1JTY2JKeC9mQzBJNjZjbTN6ZU1jbWhGWEdlWXhFUkswMktpSWM1OXVvL3lSbVBrT2tJQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["county_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["percent_total_24"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["percent_total_20"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["percent_total_16"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["percent_change_24_20"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["percent_change_24_16"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["percent_change_20_16"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"Washington","2":"25.13","3":"17.89","4":"12.56","5":"40.469536","6":"100.079618","7":"42.436306"},{"1":"Allegany","2":"16.59","3":"21.34","4":"8.60","5":"-22.258669","6":"92.906977","7":"148.139535"},{"1":"Calvert","2":"33.65","3":"21.06","4":"19.85","5":"59.781576","6":"69.521411","7":"6.095718"},{"1":"Saint Mary's","2":"31.50","3":"27.57","4":"18.68","5":"14.254625","6":"68.629550","7":"47.591006"},{"1":"Carroll","2":"27.26","3":"28.25","4":"16.39","5":"-3.504425","6":"66.320927","7":"72.361196"},{"1":"Cecil","2":"25.27","3":"23.17","4":"16.66","5":"9.063444","6":"51.680672","7":"39.075630"},{"1":"Garrett","2":"26.16","3":"46.39","4":"17.56","5":"-43.608536","6":"48.974943","7":"164.179954"},{"1":"Caroline","2":"25.32","3":"34.62","4":"18.93","5":"-26.863085","6":"33.755943","7":"82.884311"},{"1":"Wicomico","2":"24.79","3":"29.94","4":"18.56","5":"-17.201069","6":"33.566810","7":"61.314655"},{"1":"Somerset","2":"25.46","3":"35.21","4":"19.47","5":"-27.690997","6":"30.765280","7":"80.842322"},{"1":"Frederick","2":"23.02","3":"28.41","4":"18.43","5":"-18.972193","6":"24.905046","7":"54.150841"},{"1":"Dorchester","2":"21.72","3":"32.93","4":"17.41","5":"-34.041907","6":"24.755887","7":"89.144170"},{"1":"Anne Arundel","2":"24.86","3":"27.70","4":"20.18","5":"-10.252708","6":"23.191278","7":"37.264618"},{"1":"Worcester","2":"23.08","3":"32.40","4":"19.28","5":"-28.765432","6":"19.709544","7":"68.049793"},{"1":"Charles","2":"28.02","3":"30.17","4":"23.82","5":"-7.126284","6":"17.632242","7":"26.658270"},{"1":"Harford","2":"28.93","3":"37.10","4":"25.38","5":"-22.021563","6":"13.987392","7":"46.178093"},{"1":"Queen Anne's","2":"33.87","3":"42.58","4":"30.76","5":"-20.455613","6":"10.110533","7":"38.426528"},{"1":"TOTAL","2":"23.66","3":"NA","4":"22.43","5":"NA","6":"5.483727","7":"NA"},{"1":"Kent","2":"25.65","3":"33.42","4":"25.97","5":"-23.249551","6":"-1.232191","7":"28.686946"},{"1":"Baltimore County","2":"22.16","3":"23.56","4":"23.09","5":"-5.942275","6":"-4.027718","7":"2.035513"},{"1":"Talbot","2":"32.80","3":"37.16","4":"34.49","5":"-11.733046","6":"-4.899971","7":"7.741374"},{"1":"Montgomery","2":"22.89","3":"19.11","4":"24.44","5":"19.780220","6":"-6.342062","7":"-21.808511"},{"1":"Howard","2":"25.46","3":"26.99","4":"28.49","5":"-5.668766","6":"-10.635311","7":"-5.265005"},{"1":"Prince George's","2":"24.61","3":"21.19","4":"27.56","5":"16.139689","6":"-10.703919","7":"-23.113208"},{"1":"Baltimore City","2":"13.40","3":"14.93","4":"17.27","5":"-10.247823","6":"-22.408801","7":"-13.549508"}],"options":{"columns":{"min":{},"max":[10],"total":[7]},"rows":{"min":[10],"max":[10],"total":[25]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICBcbiN0aGlzIGZpbmFsIHRhYmxlLCBkZXBlbmRpbmcgb24gaG93IHlvdSBhcnJhbmdlLCB3aWxsIGFuc3dlciBxdWVzdGlvbiAgMy4gRnJvbSAyMDIwIHRvIDIwMjQgdGhlcmUgYXJlIHR3byBjb3VudGllcyBleHBlcmllbmNpbmcgYSBtYWpvciBpbmNyZWFzZSBvZiB0aGUgdG90YWwgcGVyY2VudCBvZiBlbGlnaWJsZSB2b3RlcnMgd2hvIHZvdGVkIGVhcmx5LiBDYWx2ZXJ0IChuZWFybHkgNjAlIGNoYW5nZSkgYW5kIFdhc2hpbmd0b24gKDQwJSBjaGFuZ2UpLiBXYXNoaW5ndG9uIENvdW50eSBpcyBxdWl0ZSBpbnRlcmVzdGluZywgYXMgaXQgaGFzIHRoZSBoaWdoZXN0IG5ldCBpbmNyZWFzZSwgYXMgZnJvbSAyMDE2IHRvIDIwMjQsIGl0J3MgcGVyY2VudGFnZSBvZiBlYXJseSB2b3RlcnMgaW5jcmVhc2UgYnkgYWxtb3N0IGV4YWN0bHkgMTAwJS4gXG5cbmBgYCJ9 -->
+<pre class="r"><code>  
+#this final table, depending on how you arrange, will answer question  3. From 2020 to 2024 there are two counties experiencing a major increase of the total percent of eligible voters who voted early. Calvert (nearly 60% change) and Washington (40% change). Washington County is quite interesting, as it has the highest net increase, as from 2016 to 2024, it&#39;s percentage of early voters increase by almost exactly 100%. 
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>#Question 1: What is the percentage change of early voters from an
@@ -1973,17 +2009,23 @@ voting has become a more popular option for many voters across the
 country.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90YWxfcGVyY2VudF9jaGFuZ2VzIDwtIHFfM19maW5hbCB8PlxuICBzdW1tYXJpc2UoXG4gICBhdmdfY2hhbmdlXzI0XzIwID0gbWVhbihwZXJjZW50X2NoYW5nZV8yNF8yMCwgbmEucm0gPSBUUlVFKSxcbiAgICBhdmdfY2hhbmdlXzI0XzE2ID0gbWVhbihwZXJjZW50X2NoYW5nZV8yNF8xNiwgbmEucm0gPSBUUlVFKSxcbiAgICBhdmdfY2hhbmdlXzIwXzE2ID0gbWVhbihwZXJjZW50X2NoYW5nZV8yMF8xNiwgbmEucm0gPSBUUlVFKVxuICApXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90YWxfcGVyY2VudF9jaGFuZ2VzIDwtIHFfM19maW5hbCB8PlxuICBzdW1tYXJpc2UoXG4gICBhdmdfY2hhbmdlXzI0XzIwID0gbWVhbihwZXJjZW50X2NoYW5nZV8yNF8yMCwgbmEucm0gPSBUUlVFKSxcbiAgICBhdmdfY2hhbmdlXzI0XzE2ID0gbWVhbihwZXJjZW50X2NoYW5nZV8yNF8xNiwgbmEucm0gPSBUUlVFKSxcbiAgICBhdmdfY2hhbmdlXzIwXzE2ID0gbWVhbihwZXJjZW50X2NoYW5nZV8yMF8xNiwgbmEucm0gPSBUUlVFKVxuICApXG5cbnRvdGFsX3BlcmNlbnRfY2hhbmdlc1xuYGBgIn0= -->
 <pre class="r"><code>total_percent_changes &lt;- q_3_final |&gt;
   summarise(
    avg_change_24_20 = mean(percent_change_24_20, na.rm = TRUE),
     avg_change_24_16 = mean(percent_change_24_16, na.rm = TRUE),
     avg_change_20_16 = mean(percent_change_20_16, na.rm = TRUE)
-  )</code></pre>
+  )
+
+total_percent_changes</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IG9iamVjdCAncV8zX2ZpbmFsJyBub3QgZm91bmRcbiJ9 -->
-<pre><code>Error: object &#39;q_3_final&#39; not found</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIxIMOXIDMiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFlXUmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1Wc25Bd0FjU09DREg4cXp4UG1zeWpPOWd6Vjc4L1BLS1BYQytXMjFoOHFxNktqU0RXUE1TYzFPTGdRd0JpTFZnUVlIRXN2VDQ1SXpFdlBUVWVDT1RlQ01EN09LR1p0akVEVURpcUpad0Z1V1g2OEVzNGdWaXBnWWc4UjhJMEYyVG5KTllESE1OVEpBckpiRWtVUyt0Q0tnZnlQdUhwb1U5djZBa016OFBxSWtKRkI1c2FKb1ppOUFFK0V2elFDNUowVTNPS00zTDFqVkRrMll1eUVzSDJRa1dnZ0JlS0pzUmljME1jUVhUZjZoMk5xaDJ0dFM4OU15OFZKaDNjaEtUVW5OZ0pxZWtsa0daZk1Ed0FBZUhYa0ZSWmw0SnpKOUEwV0s5a3Z5U1JKZ1dydVQ4SEpnSTJPY00vd0RIUFlMV0pBSUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["avg_change_24_20"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["avg_change_24_16"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["avg_change_20_16"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"-7.504786","2":"27.02911","3":"44.98002"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>#Question 5: How do economic factors like median income and
@@ -2069,19 +2111,20 @@ md_data</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucV81X2ZpbmFsIDwtIG1kX2RhdGEgfD4gXG4gIGxlZnRfam9pbihjb3VudHlfMjAyNCwgYnkgPSBcImNvdW50eV9uYW1lXCIpIHw+XG4gIGFycmFuZ2UodW5lbXBsb3ltZW50X3JhdGUpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucV81X2ZpbmFsIDwtIG1kX2RhdGEgfD4gXG4gIGxlZnRfam9pbihjb3VudHlfMjAyNCwgYnkgPSBcImNvdW50eV9uYW1lXCIpIHw+XG4gIGFycmFuZ2UodW5lbXBsb3ltZW50X3JhdGUpXG5cbnFfNV9maW5hbFxuYGBgIn0= -->
 <pre class="r"><code>q_5_final &lt;- md_data |&gt; 
   left_join(county_2024, by = &quot;county_name&quot;) |&gt;
-  arrange(unemployment_rate)</code></pre>
+  arrange(unemployment_rate)
+
+q_5_final</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gYGxlZnRfam9pbigpYDpcbiEgSm9pbiBjb2x1bW5zIGluIGB5YCBtdXN0IGJlIHByZXNlbnQgaW4gdGhlIGRhdGEuXG7inJYgUHJvYmxlbSB3aXRoIGBjb3VudHlfbmFtZWAuXG5CYWNrdHJhY2U6XG4gMS4gZHBseXI6OmFycmFuZ2UoLi4uKVxuIDMuIGRwbHlyOjo6bGVmdF9qb2luLmRhdGEuZnJhbWUobWRfZGF0YSwgY291bnR5XzIwMjQsIGJ5ID0gXCJjb3VudHlfbmFtZVwiKVxuIn0= -->
-<pre><code>Error in `left_join()`:
-! Join columns in `y` must be present in the data.
-✖ Problem with `county_name`.
-Backtrace:
- 1. dplyr::arrange(...)
- 3. dplyr:::left_join.data.frame(md_data, county_2024, by = &quot;county_name&quot;)</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MjQsIm5jb2wiOjQsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMjQgw5cgNCJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVViMmdjUlJUZkpIZVgzSnByemx5RTJKUnlpcUNSNUV4Tjg2OUo0RjBTazZBVTBtczErVkFKMDcyNXV5VjdNK2ZjWHE1cENBcWFEeTJhcEI5RXFING8xb29mdE9JSElkVXFKZlVmVWtHdFdDaEtXa1JhYmUzRlNpSTJrbk4yZG1jVGIyRDR6ZnU5OTM3elpuYm54UWJHV3RVeFZWR1VDc1hqS1ZNcXZIeXBlSjgrTU5qY3FTaWVjbTZVS1I3RmIrRmhIaFRpQ3crZlFUN3JIVWRsUDJLTUdvWmorZzRnNHhBMU41M0dKR2JTOUR5RmlWeFg3OHRoVE1KUlF2RERXWWRUOTV1UjhGN0VwbHltY2hpeEJHVnh4L1FQTWh6SFROY201SGJETkk5Y2Q3V2xGbzZ5SElsaldWQVZyNDhhT3NGU2NZalhpMDFaaHJxWEVqTkowNWhOdVRXbkVET3dyTURianpWZGlxbWpLSnZTU2RLa3hHR0NmY2d3OVRSbE9OeFBjOFNVS3VvQVpWb0taMDNNWk8yam5ObEsxSXd3bldnNFBJUXBTMjVlUWxYVU1IQVNFYWxVTmFwck5NMm5ZMi9ic3FQdTdsZTEzenBERnB0V2hQVjV3Tis0bG9wLytpRDR0WmJtMFNzZDRIL3U4OWhJejhlZ0RyUXVQMVBZQllIZzNKRzU1YXNRMlBQUWV6OWMreDRDTTd1K1NOeXFoY0JGOWNtbWMvT3dyZnNjVE5mZkQ4SFRQNzg4Ty8waDFPWTZvbzFIKzZEMnBYZGZHVDV4SFVMUEh0UGViLzRFUXZPdmhtK3R6RUhvK0ltZUY3L3JoZEJhNHNlUGR0K0d1c0x5MUVKTkJPNzdJM29oWEgwZHR0ZWY5TFhmL0F5MmY5bGRhTjA0REEyK3M5UFovRmZRTUwzVXRPUDFVOUR3d1pYamc4ZGlzS09wOTdHRi9JUjdqdlgrRjZ5L0V2NWFhUkZZSExncThNOFoyNzdMemd0Y1B3OEMvMWtQQ3Z3WEJCOHRheHV6N2RpQ3dNS3ZkbndoYit0c3ZMTmkrNCtHQmE2MmpkajZsK3o0MWRsdkJmS3JFWGpuckszLzl3MDc3L2U3aXNDVk8wN2N6RW1CdjAwS2RNL1IzVGQvOEpIVkN3QUpNUUF1dFZvRHV0NTI3QUozTDgwL0wxUXIzNFNlMjNWSHJnMmRnUTd2enNWOU4yZWhLN2ZFQmRhZzh5Y3I3Q0IwY1hMbllnejJDTE1SMm4rNXJQWm0zb0llR2YrRWd3OE1uZUZLME83RXRTMktST2dROG5YUStZYXQxL0lhVHo5MUdUcS90a0NGUnk5YTR4dTViMGsvOEJLVTVtL0U3Z1VlaDd4SEUwOWczUEk1MUwwNWd0TVpnMDZsK2RNZlo4aVVqa0FheDNWRXh2a1RvRzUwTUlQNUcrR0JKaldSTWY3NDdwSmQvWXptSTNMbkFKL2wxcjlSTEJadmxKYW5HU2dyeTVPa0drY21paVNZVloyaWJKU2tWTktNcVZQQ2s4cXRQdWNyU1M1akpVUk5qbGlWeEp1MVZJNU1XQTN6Zis2S0RFbGFld3JLSGdGblhiOWw3YkdyS0M4NjZUN1oyREJKYmpZdHI0RU91UjJ0SW80blpTL2c5eUd1STVMaHZjVHRhWnpOUnNRVlNrYWpobVRFeVpXTi93QTJlRm1xL0FVQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["county_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["unemployment_rate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["median_income"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["percent_total_24"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Carroll","2":"3.145490","3":"111672","4":"27.26"},{"1":"Talbot","2":"3.173432","3":"81667","4":"32.80"},{"1":"Calvert","2":"3.180552","3":"128078","4":"33.65"},{"1":"Kent","2":"3.283302","3":"71635","4":"25.65"},{"1":"Queen Anne's","2":"3.633084","3":"108332","4":"33.87"},{"1":"St. Mary's","2":"3.653390","3":"113668","4":"NA"},{"1":"Harford","2":"3.686130","3":"106417","4":"28.93"},{"1":"Frederick","2":"3.724629","3":"115724","4":"23.02"},{"1":"Howard","2":"3.779168","3":"140971","4":"25.46"},{"1":"Anne Arundel","2":"4.161978","3":"116009","4":"24.86"},{"1":"Caroline","2":"4.614469","3":"65326","4":"25.32"},{"1":"Garrett","2":"4.629564","3":"64447","4":"26.16"},{"1":"Montgomery","2":"4.841348","3":"125583","4":"22.89"},{"1":"Charles","2":"4.890217","3":"116882","4":"28.02"},{"1":"Cecil","2":"4.892190","3":"86869","4":"25.27"},{"1":"Washington","2":"4.990627","3":"73017","4":"25.13"},{"1":"Baltimore County","2":"5.234251","3":"88157","4":"22.16"},{"1":"Dorchester","2":"5.481696","3":"57490","4":"21.72"},{"1":"Worcester","2":"6.524048","3":"76689","4":"23.08"},{"1":"Prince George's","2":"6.694565","3":"97935","4":"24.61"},{"1":"Allegany","2":"6.756567","3":"55248","4":"16.59"},{"1":"Wicomico","2":"6.870858","3":"69421","4":"24.79"},{"1":"Baltimore City","2":"6.923685","3":"58349","4":"13.40"},{"1":"Somerset","2":"7.043202","3":"52149","4":"25.46"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[24]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>#Question 2: What is the relationship between the proportion of
@@ -2174,20 +2217,21 @@ md_data_2</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucV8yX2ZpbmFsIDwtIG1kX2RhdGFfMiB8PiBcbiAgbGVmdF9qb2luKGNvdW50eV8yMDI0LCBieSA9IFwiY291bnR5X25hbWVcIikgfD5cbiAgc2VsZWN0KGNvdW50eV9uYW1lLCBwZXJjZW50X3RvdGFsXzI0LG5vX3NjaG9vbF9wY3QsIHByb19zY2hvb2xfZGVncmVlX3BjdCwgbWFzdGVyc19wY3QsIGhpZ2hzY2hvb2xfcGN0LCBkb2N0b3JhdGVfcGN0LCBiYWNoZWxvcl9wY3QsIG5vX3NjaG9vbF9wY3QpIHw+XG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X3RvdGFsXzI0KSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucV8yX2ZpbmFsIDwtIG1kX2RhdGFfMiB8PiBcbiAgbGVmdF9qb2luKGNvdW50eV8yMDI0LCBieSA9IFwiY291bnR5X25hbWVcIikgfD5cbiAgc2VsZWN0KGNvdW50eV9uYW1lLCBwZXJjZW50X3RvdGFsXzI0LG5vX3NjaG9vbF9wY3QsIHByb19zY2hvb2xfZGVncmVlX3BjdCwgbWFzdGVyc19wY3QsIGhpZ2hzY2hvb2xfcGN0LCBkb2N0b3JhdGVfcGN0LCBiYWNoZWxvcl9wY3QsIG5vX3NjaG9vbF9wY3QpIHw+XG4gIGFycmFuZ2UoZGVzYyhwZXJjZW50X3RvdGFsXzI0KSlcblxucV8yX2ZpbmFsXG5gYGAifQ== -->
 <pre class="r"><code>q_2_final &lt;- md_data_2 |&gt; 
   left_join(county_2024, by = &quot;county_name&quot;) |&gt;
   select(county_name, percent_total_24,no_school_pct, pro_school_degree_pct, masters_pct, highschool_pct, doctorate_pct, bachelor_pct, no_school_pct) |&gt;
-  arrange(desc(percent_total_24))</code></pre>
+  arrange(desc(percent_total_24))
+
+q_2_final</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gYGxlZnRfam9pbigpYDpcbiEgSm9pbiBjb2x1bW5zIGluIGB5YCBtdXN0IGJlIHByZXNlbnQgaW4gdGhlIGRhdGEuXG7inJYgUHJvYmxlbSB3aXRoIGBjb3VudHlfbmFtZWAuXG5CYWNrdHJhY2U6XG4gMS4gZHBseXI6OmFycmFuZ2UoLi4uKVxuIDQuIGRwbHlyOjo6bGVmdF9qb2luLmRhdGEuZnJhbWUobWRfZGF0YV8yLCBjb3VudHlfMjAyNCwgYnkgPSBcImNvdW50eV9uYW1lXCIpXG4ifQ== -->
-<pre><code>Error in `left_join()`:
-! Join columns in `y` must be present in the data.
-✖ Problem with `county_name`.
-Backtrace:
- 1. dplyr::arrange(...)
- 4. dplyr:::left_join.data.frame(md_data_2, county_2024, by = &quot;county_name&quot;)</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MjQsIm5jb2wiOjgsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiMjQgw5cgOCJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyVldDMVFUVnhvZVNIaEZvYlFxVVZwQ1VDQ1NGZ29HSWtIby9YbFQ2d3VLU3NFYWgyUk1JbUVtWnpLZ0lpQjJqMVU0dEZTdDdTcXNybysxQlpYYTQ5RmlQU3VDNndORnFVOGVGbGRkMzZLR2h3Z2lzSk9RaVN4N3o3a3o5Ly91Ly8zMy8rNU41cjhwY1dreVFab0F3ekFleHVmYllUd0hkb2c1TEV4TkNBekhNTDQ5YTloaGZNekYvRjdGT2sxZ0I4NXNkMmY3Wk92RStPUWNnaURGMFNSSlNJeFd6Q2tXMStjU05HTTFIVk54ZlNiRldVNUpPTDJjb3RVMlh5MU82NGxSVkpxbTlIck9UR1JOZ3VHNC9NOEkwaFkxaVZxSjI4STRmMDVsRTdTUjRHYWQyVGlVWGtjU1Z0c2hsbERwdUtpQ3hiaFJxeU0xREVWeUtzejVpNlBwSEZKTmNGN09pM1VxS3B2dFZ2dWRCYlNPVkJIaVJJS2lOVy9GdWl5bWFCVmhaQWlhQXhKb1FrM1FPbFVXdDl4Y2ltUTA1dnhXV3hIM0dGelA2TElwbWhESFVqa2t3K0dDT0RhV2RuUXc1Mmk5bnREZ0pPZmhOb3FwZTh2N25Ba1N6OFhwMVd4V3JJLzVlQUJlTEpuK3NyNE00S3JNM0FDV1d4cEVQcCtZZHlleEdpSWRSRFhKVDlmRHJKZ3kxdkVVUkppOWx3U0FZdCtJbnlLSE5hZjN2bjJ6enFLYUZGREVqL0FVUG9uVmJDUUkvOU5DaFBEelVZWTl6UUlJcnhpeFoxcVdtUWd6cmV2SS85TXNpRExzQmJsMW5iQWFTMEFJL2xGZ0pvSzAwZHd1cmpXWmY0Tk91emtkcUVNOGYyM1ZYOWVpbTQ2Yk96WnVMVWRQaTdhWDFrdG1vWTZ5dXJDOC9IR29jMWVUTkhQYmRmUlFXSm4yKzlLejZFSHhOOHIxeHhYb3o3dHYvTEcvckVMZHVWOHNtbm03RXozcEw5bFk4dU13R3ZDYUxvMmFWb1E2K2VjTTl2ZCtRaDMxRjFwbEh4aFFwOG0zU1hvaEIzVUo1RHMyR01UZ09DY3BzVEZEaSs3amYyU2NibHVET2xXUENmR2JBTUFPUHF5dHp5aEJmYWNEenpXY3U0MzZkaDRXWnI0SVF2Y2kxeXhnaEhMMDJ2MnVSeXJqZ0o3NHhyNmMxN3pCZGg1MkgvcnF6c01WTkJRMys2Skt0QmttUE1pcTJwaFNCRmlzN012TDExNmh6dEJmWjFEM3ZWR2ZsbGZuRVN4RS9mNWhoUjRkRDhCSmNxeWREaTZFaVhQczN6dndleFM2ZTZCKzZZYUZ4YWpMVDNsd2F1OGgxRlVxcHlkSVpxRHViL1lxUDdwOUNIai9ucWZoSlVuUjBLdWRibTdOaVdpd3FseFU4N0UvNmluMWYxTDdiVHZZaGQxY0p6K2FDNTdVSDBmTFBCK0I0TmZmVHFXb2VsRC8wQjNxbDdwazFHUEMybHJJRUhESkw5L2Q0elVaZGZNMzFlcTNDVzA2ZklWSlBrVm4zb1dBa3N1ckxyZmRCUC9TTDdYdGQ5NERhY0xHdlBySUN2QmJzbFgxUFBFZGtOd1BlM2JESlFQRU1hckZkOGhMNENkcVZiYkdIZ1I1VmVVOVYxa1p1QTBjYmVZWnJvQXdjMEpNU08xTkVPY0NudGFvQjYrOTdjTFNtQnNRT09Pa3A1ZCtENGdYU3Bsa1V3Tkl6bit0L2VmOEdKZ1d0Vi81Y05BVlBtcFRYS2RXRjRHc3Buei9HOFYxQ0ZpYllXakluZzNDNnRpSWF0RVI4Q1NPVEsxWTV3TVNsTzd6OHpJZEJLamkxUzNobTJ3NkltU0gyK3lidmdmRnNxazF4b2NuSVV4d2Q3WHByQnZJR1JyTDNCVUhzL2hrNU96cVBGRE1IMWY2anhYcklib3laTC9wTncxRUVhSHh5MDhjQUwrZWJaOE9IN29GbjN4dHQrbk0vYlVRM1ZPUi9ycG1DU0FNRngySi94aFF6bWVGdzgrYVFSYmJMeU5YeklISXdjaWhwMmYvQnZJa3ArcjRCWUVRTWZ4OUdUWXpIVUpmSHM4bm01SmhPaGJZSHhQeUxvUzVkbnlWVlhHRGpUZlJsSzNlQ3ZDdmdwMkxYRGZBekVXbS9tc1hVa0h4K3RHTkw0WXFiUCtQdnZRK2J6di9aYWl2NTFybDZhZEdzSisyajRFdDc2TytXNjN0Rkg0R2RSNlBGeHErYTBTdkZMdDdLeHNBOVY3dnl6aThsUStPZGZ5dGwvNU93NlQyVy9uMVVSTDB1TGt4TlM3MUpHcXAxS1E1RFNCa0NpOFQxTmU5UUkvbEo1SXVDWVZvYUtCaXl4SC9wYWhYVXBDN01GK0JCdmQ0L1RBZHVsQjN3bVlxQ1dUQWp5NVlGMXBlQ0ZOTzcxb2psZ3lnWWZwSzEvVnpGT3JXeVlNUXJ3MDlIL1RibnJzN0FYaDVoajBwRzVwUVQ4aTE0T0txVU50NWlGNUpicGQ4T3g1OGx2WnRURVdid010N0c1d0t2Z28rSGdkYmZjOTRnODhWYlAva1hCckVnejlybVN0MU1QV3FaKzI0WENONHBNK2Y5NkU3QVI1SExucVdPR2VCOTVUN3llZnIyVHhXeUt1THEzbmdQYWQzNzhFVUdZakhtN1kwaUxhRDE3emlIWVhiajRINGgvS0FXeWRjWUVwTFFkaXJaNVVnMnZmbXAyTUZMU0MrcGEzOUpVd0tIdGlrNEh0ZjdRQ3ZpTzlDM3Q5WEJSOWN1dmpKM01nSE1FMVY5bWxFeXhtWXVHdndXVko3QUlpa0s2WExtK3JHMUVzSEVzOG1qTlphNld3Rng2a3NIM3VsZVk2ckJBYUNyUjRrbzJRb0J0Y3JaNFJhY1ZlU1VocFZXb3JTS3cwcXJxaE5NdEEyVkUxb2FJSVlOVGt1R3pmWERlTW95RTJyMDJqL0w0cXJtbEl4Rkkwem85bmpNM0cyOE9ncDJvTDlyeFlYbWxvWnhPbHhaYnQ5RWZzWUhoNStORmEwU284Yk9kRWNLRkRqREI2MG5EWnJ4ckNoTVJRbnlzRG9LSklsMlp0dkY0NWp5SGIwR01BOWh6Um5vZzVVYVhQSXJNQ1E0REh6UEFPcE1TOXFnVWFhcTNVOGVkVFllU1FOKzJFcjNaRzdWQkNrWnRTbFFZOW4ycTREUERXUnkrMHJ1eUdXL1FneXNGY0NiZ3NGTEdvTXNwd2poNmdvUFlkWXBHTkQvd1Y5akM5S2N3a0FBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["county_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["percent_total_24"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["no_school_pct"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["pro_school_degree_pct"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["masters_pct"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["highschool_pct"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["doctorate_pct"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["bachelor_pct"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"Queen Anne's","2":"33.87","3":"0.8789442","4":"2.1460655","5":"10.045472","6":"26.20196","7":"1.5222093","8":"7.741363"},{"1":"Calvert","2":"33.65","3":"0.4222762","4":"1.8916729","5":"12.771129","6":"25.37553","7":"1.5597731","8":"8.685490"},{"1":"Talbot","2":"32.80","3":"0.8594487","4":"4.9750201","5":"11.274150","6":"21.04252","7":"2.2674073","8":"7.280858"},{"1":"Harford","2":"28.93","3":"0.8925482","4":"2.0328128","5":"13.137760","6":"22.45486","7":"1.5544070","8":"8.544295"},{"1":"Charles","2":"28.02","3":"1.1020042","4":"1.0753643","5":"10.680827","6":"27.01731","7":"1.1082202","8":"8.910161"},{"1":"Carroll","2":"27.26","3":"0.7216384","4":"1.5253942","5":"11.947677","6":"25.30877","7":"1.4515714","8":"8.495425"},{"1":"Garrett","2":"26.16","3":"0.7042910","4":"1.5718284","5":"8.129664","6":"35.32183","7":"1.4272388","8":"9.412313"},{"1":"Kent","2":"25.65","3":"0.4513541","4":"2.8943975","5":"10.560252","6":"29.39533","7":"2.8442470","8":"5.588193"},{"1":"Howard","2":"25.46","3":"1.2163938","4":"5.0742267","5":"22.666655","6":"10.97773","7":"5.4666690","8":"5.677540"},{"1":"Somerset","2":"25.46","3":"0.8429616","4":"0.5835888","5":"3.872907","6":"30.52346","7":"0.8075925","8":"7.775289"},{"1":"Caroline","2":"25.32","3":"1.6946184","4":"1.1341244","5":"5.845777","6":"35.91102","7":"0.3853396","8":"6.353724"},{"1":"Cecil","2":"25.27","3":"1.0636677","4":"1.1592316","5":"8.230960","6":"31.00148","7":"1.0138083","8":"7.825160"},{"1":"Washington","2":"25.13","3":"0.8987788","4":"1.2220806","5":"7.411000","6":"31.45818","7":"0.7879325","8":"8.025273"},{"1":"Anne Arundel","2":"24.86","3":"1.1211289","4":"2.4840363","5":"14.599122","6":"19.26552","7":"1.9364286","8":"7.326697"},{"1":"Wicomico","2":"24.79","3":"1.1274935","4":"1.9354544","5":"8.166340","6":"28.98921","7":"1.3846411","8":"8.294153"},{"1":"Prince George's","2":"24.61","3":"2.7872472","4":"1.8541518","5":"11.895557","6":"22.28137","7":"1.8523231","8":"6.461415"},{"1":"Worcester","2":"23.08","3":"0.6681902","4":"1.2842168","5":"9.620448","6":"26.99836","7":"1.2047295","8":"7.663073"},{"1":"Frederick","2":"23.02","3":"1.0868925","4":"2.1512976","5":"14.426222","6":"20.95989","7":"2.5319777","8":"8.434393"},{"1":"Montgomery","2":"22.89","3":"2.0849147","4":"6.6091946","5":"19.721125","6":"12.00035","7":"6.4429988","8":"5.500081"},{"1":"Baltimore County","2":"22.16","3":"1.5481394","4":"3.3367763","5":"12.748745","6":"21.05439","7":"1.9655332","8":"7.307191"},{"1":"Dorchester","2":"21.72","3":"1.5389892","4":"1.6247267","5":"5.920178","6":"35.90689","7":"1.2131864","8":"7.201955"},{"1":"Allegany","2":"16.59","3":"0.6323830","4":"1.3085946","5":"6.599324","6":"33.53508","7":"0.9684017","8":"9.694453"},{"1":"Baltimore City","2":"13.40","3":"1.6291219","4":"3.1858437","5":"11.623735","6":"23.33961","7":"2.4347852","8":"5.158195"},{"1":"St. Mary's","2":"NA","3":"0.8169269","4":"1.1886156","5":"12.693889","6":"25.98012","7":"1.2621653","8":"7.541470"}],"options":{"columns":{"min":{},"max":[10],"total":[8]},"rows":{"min":[10],"max":[10],"total":[24]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
