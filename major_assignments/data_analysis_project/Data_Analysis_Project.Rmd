@@ -9,7 +9,6 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 # Turn off scientific notation
 options(scipen=999)
 
-# Load the tidyverse. Ensure the tidyverse is already installed outside of the script
 library(tidyverse)
 library(tidytext)
 library(janitor)
@@ -25,7 +24,7 @@ census_api_key("03183f1d7157fca8529a26898cff8c1b802565ed", overwrite=TRUE)
 ```
 
 ```{r}
-# Load the core datasets
+# Load the datasets
 county_2024 <- read_csv("data/earlyvote_county_24.csv")
 county_2020 <- read_csv("data/earlyvote_county_20.csv")
 county_2016 <- read_csv("data/earlyvote_county_16.csv")
@@ -44,7 +43,7 @@ party_24 <- read_csv("data/earlyvoting_party.csv")
 
 In terms of time frame, we have access to the General Election data from 2016, 2020 and 2024, which will allow us to explore the change in early voting over different election cycles. Because we have access to different time frames of data, there aren't any looming limits for the data. Some of our questions reference demographics, (ie "How do economic factors like household income and unemployment rates impact early voter voter turnout across Maryland counties?" and "Are certain counties or demographic groups turning out in higher numbers for early voting compared to previous elections?") and the data set does include some demographic data, including gender, political party affiliation and age group, we do lack other common demographics such as race, household income and unemployment rates. What we may have to do is locate that demographic data from individual counties and compare it to the early voting data we have now. 
 
-#Most newsworhty thing about the data so far.
+#Most newsworthy thing about the data so far.
 Change in early voting from 2020 to 2024: -7.504786 %
 Change in early voting from 2016 to 2020: 44.98002 %
 Change in early voting from 2016 to 2024: 27.02911 %
@@ -58,7 +57,7 @@ Also the three counties with the highest percentage of early voters, all fell in
 
 #Question 4: How does early voting turnout correlate with registered party affiliation across Maryland counties? 
 
-#Answer 4: Democratic counties have more Democratic early voters, while Republican counties have more Republican early voters, reflecting their political leanings. This shows that early voting turnout aligns with voter demographics. Overall, the data matches typical voting patterns.
+#Answer 4: Democratic counties have more Democratic early voters, while Republican counties have more Republican early voters, reflecting their political leanings. This shows that early voting turnout aligns with voter demographics. Overall, the data matches typical voting patterns. Because Maryland is an overwhelming democratic state, there are a higher number of democratic early voters due to the total percentage of democrats. 
 
 ```{r}
 early_voting_2024 |> 
@@ -86,13 +85,14 @@ early_voting_2024 |>
 
 ```{r}
 #For each year, I cleaned the data, made the percent total number a DBL and renamed the percent total to its respective year. I selected only the county and the total percent of eligible voters who voter early. For this question, the total number of voters on any given day was not needed. 
+
 county_2024 <- 
   county_2024 |> 
   clean_names() |> 
   select(county_name, percent_total) |> 
   mutate(percent_total = as.numeric(str_replace(percent_total, "%", ""))) |> 
   rename(percent_total_24 = percent_total) |> 
-  arrange(desc(percent_total_24))
+  arrange(desc(percent_total_24)) 
 
 county_2020_clean <- 
   county_2020 |> 
@@ -146,12 +146,17 @@ total_percent_changes <- q_3_final |>
   )
 
 total_percent_changes
-
 ```
 
 #Question 5: How do economic factors like median income and unemployment rates impact early voter turnout across Maryland counties?
 
-#Answer 5: Counties with lower unemployment and higher incomes see more people turning out for early voting, showing that economic stability can make it easier for people to participate. When life is a little less stressful financially, it might be simpler to make time to vote early. This pattern shows how a community’s economic situation can influence voter turnout.
+#Answer 5: Counties with lower unemployment and higher incomes see more people turning out for early voting, showing that economic stability can make it easier for people to participate. When life is a little less stressful financially, it might be simpler to make time to vote early. This pattern shows how a community’s economic situation can influence voter turnout. The three counties with the highest percentage of early voters, all fell in the top 5 for lowest unemployment rate:
+
+2 Talbot	Unemployment: 3.173432	early voter: 32.80	
+3 Calvert	Unemployment 3.180552		early voter 33.65	
+5 Queen Anne's	Unemployment 3.633084	 early voter 33.87
+
+**Baltimore City (58,349 median income, 13.40% early voter turnout) and Allegheny County (52,248 median income, 16.59% early voter turnout), are in the bottom four of counties in terms of median income, and are the two counties with the lowest early voter turnout.**
 
 ```{r}
 md_data <- get_acs(
@@ -211,7 +216,7 @@ q_5_final
 
 #Question 2: What is the relationship between the proportion of eligible voters and early voter turnout in recent elections, and how do demographics explain differences across counties?
 
-#Answer 2: Counties with more eligible voters tend to have higher early voting turnout. Demographics like income, unemployment, and party affiliation also explain differences between counties. Demographics like education don't explain the differences differences between counties as much as expected.
+#Answer 2: Counties with more eligible voters tend to have higher early voting turnout. Demographics like income, unemployment, and party affiliation also explain differences between counties. Demographics like education don't explain the differences between counties as much as expected. There may be a loose trend when it comes to no_school_pct. 
 
 ```{r}
 md_data_2 <- get_acs(
