@@ -56,7 +56,7 @@ Also the three counties with the highest percentage of early voters, all fell in
 
 #Question 4: How does early voting turnout correlate with registered party affiliation across Maryland counties? 
 
-#Answer 4: Democratic counties have more Democratic early voters, and Republican counties show the opposite. This matches typical voting patterns.
+#Answer 4: Democratic counties have more Democratic early voters, while Republican counties have more Republican early voters, reflecting their political leanings. This shows that early voting turnout aligns with voter demographics. Overall, the data matches typical voting patterns.
 
 ```{r}
 early_voting_2024 |> 
@@ -80,56 +80,65 @@ early_voting_2024 |>
 
 #Question 3: Are certain counties turning out in higher numbers for early voting compared to previous elections? 
 
-#Answer 3: Calvert County’s early voting increased by 60% from 2020 to 2024, and Washington County’s rose 40%. Washington saw the largest growth since 2016, with a 100% increase.
+#Answer 3: Calvert County saw a big jump in early voting, increasing by 60% from 2020 to 2024, while Washington County wasn’t far behind with a 40% rise. Washington County stands out even more with a 100% increase in early voting since 2016, showing how much things have changed over the years. This growth could be driven by efforts to make early voting easier or simply more interest in getting involved.
 
 ```{r}
-# Clean names for county_2024
-county_2024_clean <- county_2024 |> 
+#For each year, I cleaned the data, made the percent total number a DBL and renamed the percent total to its respective year. I selected only the county and the total percent of eligible voters who voter early. For this question, the total number of voters on any given day was not needed. 
+county_2024 <- 
+  county_2024 |> 
   clean_names() |> 
   select(county_name, percent_total) |> 
   mutate(percent_total = as.numeric(str_replace(percent_total, "%", ""))) |> 
-  rename(percent_total_24 = percent_total)
+  rename(percent_total_24 = percent_total) |> 
+  arrange(desc(percent_total_24))
 
-# Clean names for county_2020
-county_2020_clean <- county_2020 |> 
+county_2020_clean <- 
+  county_2020 |> 
   clean_names() |> 
   select(county, percent_total) |> 
   mutate(percent_total = as.numeric(str_replace(percent_total, "%", ""))) |> 
-  rename(percent_total_20 = percent_total, county_name = county)
+  rename(percent_total_20 = percent_total, county_name = county) |> 
+  arrange(desc(percent_total_20))
 
-# Clean names for county_2016
-county_2016_clean <- county_2016 |> 
+county_2016 <- 
+  county_2016 |> 
   clean_names() |> 
   select(county_name, percent_total) |> 
   mutate(percent_total = as.numeric(str_replace(percent_total, "%", ""))) |> 
-  rename(percent_total_16 = percent_total)
+  rename(percent_total_16 = percent_total) |> 
+  arrange(desc(percent_total_16))
 
-# Combine the cleaned datasets
-q_3_final <- county_2024_clean |> 
+# next I combined the three datasets into one, called Question three final. 
+q_3_final <- county_2024 |> 
   left_join(county_2020_clean, by = "county_name") |> 
-  left_join(county_2016_clean, by = "county_name") |> 
-  mutate(
-    percent_change_24_20 = ((percent_total_24 - percent_total_20) / percent_total_20) * 100,
-    percent_change_24_16 = ((percent_total_24 - percent_total_16) / percent_total_16) * 100,
-    percent_change_20_16 = ((percent_total_20 - percent_total_16) / percent_total_16) * 100
-  ) |> 
+  left_join(county_2016, by = "county_name")
+
+#here I create three new columns to show the three different possible percent changes. (16 to 20, 16 to 24 and 20 to 24.)
+q_3_final <-
+  q_3_final |>
+  mutate( 
+    percent_change_24_20 = ((percent_total_24 - percent_total_20) / percent_total_20) * 100) |>
+  mutate( 
+    percent_change_24_16 =  ((percent_total_24 - percent_total_16) / percent_total_16) * 100) |>
+  mutate( 
+    percent_change_20_16 =  ((percent_total_20 - percent_total_16) / percent_total_16) * 100) |>
   arrange(desc(percent_change_24_16))
-
-q_3_final
-
-
-  # this final table, depending on how you arrange, will answer question  3. From 2020 to 2024 there are two counties experiencing a major increase of the total percent of eligible voters who voted early. Calvert (nearly 60% change) and Washington (40% change). Washington County is quite interesting, as it has the highest net increase, as from 2016 to 2024, it's percentage of early voters increase by almost exactly 100%. 
+  
+  
+  q_3_final
+  
+#this final table, depending on how you arrange, will answer question  3. From 2020 to 2024 there are two counties experiencing a major increase of the total percent of eligible voters who voted early. Calvert (nearly 60% change) and Washington (40% change). Washington County is quite interesting, as it has the highest net increase, as from 2016 to 2024, it's percentage of early voters increase by almost exactly 100%. 
 
 ```
 
 #Question 1: What is the percentage change of early voters from an election prior to covid (or 2020) to after covid? 
 
-#Answer 1: Early voting increased by 27% from 2016 to 2024, showing lasting changes from pandemic-era voting. Turnout dipped slightly (-7.5%) from 2020 to 2024 but stayed much higher than 2016. This is quite similar to question three. You can look at the percent change for each county, but here is the total percent change 
+#Answer 1: Early voting saw a 27% increase from 2016 to 2024, showing that the shift toward early voting during the pandemic has had a lasting impact. While turnout dipped slightly by 7.5% from 2020 to 2024, it still remained much higher than in 2016. This trend highlights how early voting has become a more popular option for many voters across the country.
 
 ```{r}
-total_percent_changes <- q_3_final |> 
+total_percent_changes <- q_3_final |>
   summarise(
-    avg_change_24_20 = mean(percent_change_24_20, na.rm = TRUE),
+   avg_change_24_20 = mean(percent_change_24_20, na.rm = TRUE),
     avg_change_24_16 = mean(percent_change_24_16, na.rm = TRUE),
     avg_change_20_16 = mean(percent_change_20_16, na.rm = TRUE)
   )
@@ -140,7 +149,7 @@ total_percent_changes
 
 #Question 5: How do economic factors like median income and unemployment rates impact early voter turnout across Maryland counties?
 
-#Answer 5: Counties with lower unemployment and higher incomes have higher early voting turnout. Economic stability appears to encourage voter participation.
+#Answer 5: Counties with lower unemployment and higher incomes see more people turning out for early voting, showing that economic stability can make it easier for people to participate. When life is a little less stressful financially, it might be simpler to make time to vote early. This pattern shows how a community’s economic situation can influence voter turnout.
 
 ```{r}
 md_data <- get_acs(
@@ -153,23 +162,50 @@ md_data <- get_acs(
   state = "MD",
   year = 2022,
   geometry = FALSE
-) |> 
-  rename(county_name = NAME) |> 
+) |>
+  rename(county_name = NAME) |>
+  
   mutate(
+    # Clean up county names by removing " County, Maryland"
     county_name = gsub(" County, Maryland", "", county_name),
+    # Rename 'Baltimore' to 'Baltimore County'
     county_name = gsub("^Baltimore$", "Baltimore County", county_name),
-    county_name = gsub("Baltimore city, Maryland", "Baltimore City", county_name),
-    unemployment_rate = (unemployment / labor_force) * 100
-  ) |> 
-  select(county_name, unemployment_rate, median_income)
+    # Rename 'Baltimore city, Maryland' to 'Baltimore City'
+    county_name = gsub("Baltimore city, Maryland", "Baltimore City", county_name)
+  ) |>
+  
+  group_by(GEOID, county_name, variable) |>
+  summarise(
+    estimate = first(estimate),  
+    .groups = 'drop'  
+  ) |>
+  pivot_wider(
+    names_from = variable,    
+    values_from = estimate,    
+    values_fill = list(estimate = NA)  
+  ) |>
+    #i asked chatgpt why this code wasn't running, and it told me to add this code, which rearranged columns and the data points in my column to more accurately identify the trends in the data set. 
 
+  mutate(
+    unemployment_rate = (unemployment/labor_force) * 100
+  ) |>
+  select(county_name, unemployment_rate, median_income)|> 
+  
+  arrange(county_name)
+ 
+#i used chatgpt for this mutate function. I was unsure how to fix all the names of the counties and keep Baltimore County and make Baltimore City correct so i asked how to change the county_names to fit the format so i could bind this data set to the early voting data set.   
+
+md_data
+```
+
+```{r}
 q_5_final <- md_data |> 
-  left_join(county_2024_clean, by = "county_name") |> 
+  left_join(county_2024, by = "county_name") |>
   arrange(unemployment_rate)
 
 q_5_final
-
 ```
+
 
 #Question 2: What is the relationship between the proportion of eligible voters and early voter turnout in recent elections, and how do demographics explain differences across counties?
 
@@ -179,38 +215,72 @@ q_5_final
 md_data_2 <- get_acs(
   geography = "county",
   variables = c(
-    total_pop_over_25 = "B15003_001",
-    no_school = "B15003_002",
+    total_pop_over_25 = "B15003_001" ,
+    no_school = "B15003_002" ,
     highschool = "B15003_017",
     bachelor = "B15003_021",
-    masters = "B15003_023",
-    pro_school_degree = "B15003_024",
+    masters = "B15003_023" , 
+    pro_school_degree = "B15003_024" , 
     doctorate = "B15003_025"
   ),
   state = "MD",
   year = 2022,
   geometry = FALSE
-) |> 
-  rename(county_name = NAME) |> 
+) |>
+  rename(county_name = NAME) |>
+  
   mutate(
+    # Clean up county names by removing " County, Maryland"
     county_name = gsub(" County, Maryland", "", county_name),
+    # Rename 'Baltimore' to 'Baltimore County'
     county_name = gsub("^Baltimore$", "Baltimore County", county_name),
-    county_name = gsub("Baltimore city, Maryland", "Baltimore City", county_name),
-    bachelor_pct = (bachelor / total_pop_over_25) * 100,
-    doctorate_pct = (doctorate / total_pop_over_25) * 100,
-    highschool_pct = (highschool / total_pop_over_25) * 100,
-    masters_pct = (masters / total_pop_over_25) * 100,
-    pro_school_degree_pct = (pro_school_degree / total_pop_over_25) * 100,
-    no_school_pct = (no_school / total_pop_over_25) * 100
-  ) |> 
-  select(GEOID, county_name, no_school_pct, pro_school_degree_pct, masters_pct, highschool_pct, doctorate_pct, bachelor_pct)
+    # Rename 'Baltimore city, Maryland' to 'Baltimore City'
+    county_name = gsub("Baltimore city, Maryland", "Baltimore City", county_name)
+  ) |>
+  
+  group_by(GEOID, county_name, variable) |>
+  summarise(
+    estimate = first(estimate),  
+    .groups = 'drop'  
+  ) |>
+  pivot_wider(
+    names_from = variable,    
+    values_from = estimate,    
+    values_fill = list(estimate = NA)  
+  ) |>
+  #i asked chatgpt why this code wasn't running, and it told me to add this code, which rearranged columns and the data points in my column to more accurately identify the trends in the data set. 
+  mutate(
+    bachelor_pct = (bachelor/total_pop_over_25) *100
+  ) |>
+   mutate(
+    doctorate_pct = (doctorate/total_pop_over_25) *100
+  ) |>
+   mutate(
+    highschool_pct = (highschool/total_pop_over_25) *100
+  ) |>
+   mutate(
+    masters_pct = (masters/total_pop_over_25) *100
+  ) |>
+   mutate(
+    pro_school_degree_pct = (pro_school_degree/total_pop_over_25) *100
+  ) |>
+ 
+   mutate(
+    no_school_pct = (no_school/total_pop_over_25) *100 ) |>
+  
+  select(GEOID, county_name, no_school_pct, pro_school_degree_pct, masters_pct, highschool_pct, doctorate_pct, bachelor_pct, no_school_pct)
+ 
+#i used chatgpt for this mutate function. I was unsure how to fix all the names of the counties and keep Baltimore County and make Baltimore City correct so i asked how to change the county_names to fit the format so i could bind this data set to the early voting data set.   
+  
+md_data_2
+```
 
+```{r}
 q_2_final <- md_data_2 |> 
-  left_join(county_2024_clean, by = "county_name") |> 
-  select(county_name, percent_total_24, no_school_pct, pro_school_degree_pct, masters_pct, highschool_pct, doctorate_pct, bachelor_pct) |> 
+  left_join(county_2024, by = "county_name") |>
+  select(county_name, percent_total_24,no_school_pct, pro_school_degree_pct, masters_pct, highschool_pct, doctorate_pct, bachelor_pct, no_school_pct) |>
   arrange(desc(percent_total_24))
 
 q_2_final
-
 ```
 

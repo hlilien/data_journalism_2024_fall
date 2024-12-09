@@ -9,8 +9,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 # Turn off scientific notation
 options(scipen=999)
 
-# Load the tidyverse. If you have not installed the tidyverse already, remove the # from the next line and run it first.  
-# install.packages('tidyverse')
+# Load the tidyverse. Ensure the tidyverse is already installed outside of the script
 library(tidyverse)
 library(tidytext)
 library(janitor)
@@ -19,18 +18,18 @@ library(tidycensus)
 ```
 
 ```{r echo=FALSE}
+# Set Census API key
 census_api_key("03183f1d7157fca8529a26898cff8c1b802565ed", overwrite=TRUE)
 ```
 
 ```{r}
-#loads in the core data sets needed, as well as some more specific, cleaned data focusing on county level data
-county_2024_2  <- read_csv("data/earlyvote_county_24.csv")
+# Load the core datasets
 county_2024 <- read_csv("data/earlyvote_county_24.csv")
 county_2020 <- read_csv("data/earlyvote_county_20.csv")
 county_2016 <- read_csv("data/earlyvote_county_16.csv")
 
 early_voting_16 <- read_csv("data/2016_EarlyVoting_RAW_data.csv")
-early_voting_20 <-read_csv("data/2020_EarlyVoting_RAW_data.csv")
+early_voting_20 <- read_csv("data/2020_EarlyVoting_RAW_data.csv")
 early_voting_2024 <- read_csv("data/2024_EarlyVoting_RAW_data.csv")
 
 party_24 <- read_csv("data/earlyvoting_party.csv")
@@ -55,51 +54,34 @@ Also the three counties with the highest percentage of early voters, all fell in
 #3Calvert	Unemploymet 3.180552		early voter 33.65	
 #5 Queen Anne's	Unemploymet 3.633084		early voter 33.87	
 
-#Question 4: 
-#How does early voting turnout correlate with registered party affiliation across Maryland counties? 
+#Question 4: How does early voting turnout correlate with registered party affiliation across Maryland counties? 
+
+#Answer 4: Democratic counties have more Democratic early voters, while Republican counties have more Republican early voters, reflecting their political leanings. This shows that early voting turnout aligns with voter demographics. Overall, the data matches typical voting patterns.
 
 ```{r}
-early_voting_2024 |>
-  clean_names() |>  #clean data 
-  group_by(county_name) |> # more than 200,000 rows of data (as this data set originally had each early voting location as its own individual data point.) Now only 24 rows.
-   summarise(
+early_voting_2024 |> 
+  clean_names() |>  
+  group_by(county_name) |> 
+  summarise(
     total_voters = n(),
     dem = sum(party_code == "DEM", na.rm = TRUE),
     rep = sum(party_code == "REP", na.rm = TRUE),
     oth = sum(party_code == "OTH", na.rm = TRUE),
     una = sum(party_code == "UNA", na.rm = TRUE),
     lib = sum(party_code == "LIB", na.rm = TRUE)
-  ) |>
-  
-  #there was a column called "party_code" which either had a DEM, REP, OTH etc, to signify political party. to make my own columns, i summarized to create the new columns, which just have the total number of early voters by political party. 
+  ) |>  
   mutate(
     percent_dem = (dem / total_voters) * 100,
-    percent_rep = rep / total_voters * 100
+    percent_rep = (rep / total_voters) * 100
   ) |> 
-  #made new columns to show what percent of the early voters in each county were Dem and which percent were Rep. Honestly not a very significant trend to me here. The counties that tend to lean red seem to have a higher percentage of Rep early voters and vice-versa. 
   arrange(desc(percent_dem))
-
-
-      
-    
-
-    
-
- 
-
 
 ```
 
+#Question 3: Are certain counties turning out in higher numbers for early voting compared to previous elections? 
 
+#Answer 3: Calvert County saw a big jump in early voting, increasing by 60% from 2020 to 2024, while Washington County wasn’t far behind with a 40% rise. Washington County stands out even more with a 100% increase in early voting since 2016, showing how much things have changed over the years. This growth could be driven by efforts to make early voting easier or simply more interest in getting involved.
 
-
-
-
-#Question 3: 
-#Are certain counties turning out in higher numbers for early voting compared to previous elections? 
-
-
-#A
 ```{r}
 #For each year, I cleaned the data, made the percent total number a DBL and renamed the percent total to its respective year. I selected only the county and the total percent of eligible voters who voter early. For this question, the total number of voters on any given day was not needed. 
 county_2024 <- 
@@ -145,14 +127,13 @@ q_3_final <-
   
   q_3_final
   
-  # this final table, depending on how you arrange, will answer question  3. From 2020 to 2024 there are two counties experiencing a major increase of the total percent of eligible voters who voted early. Calvert (nearly 60% change) and Washington (40% change). Washington County is quite interesting, as it has the highest net increase, as from 2016 to 2024, it's percentage of early voters increase by almost exactly 100%. 
-
+#this final table, depending on how you arrange, will answer question  3. From 2020 to 2024 there are two counties experiencing a major increase of the total percent of eligible voters who voted early. Calvert (nearly 60% change) and Washington (40% change). Washington County is quite interesting, as it has the highest net increase, as from 2016 to 2024, it's percentage of early voters increase by almost exactly 100%. 
 
 ```
 
 #Question 1: What is the percentage change of early voters from an election prior to covid (or 2020) to after covid? 
 
-#Answer: This is quite similar to question three. You can look at the percent change for each county, but here is the total percent change 
+#Answer 1: Early voting saw a 27% increase from 2016 to 2024, showing that the shift toward early voting during the pandemic has had a lasting impact. While turnout dipped slightly by 7.5% from 2020 to 2024, it still remained much higher than in 2016. This trend highlights how early voting has become a more popular option for many voters across the country.
 
 ```{r}
 total_percent_changes <- q_3_final |>
@@ -163,13 +144,14 @@ total_percent_changes <- q_3_final |>
   )
 
 total_percent_changes
+
 ```
 
-#Question 5 
-#How do economic factors like median income and unemployment rates impact early voter turnout across Maryland counties? 
+#Question 5: How do economic factors like median income and unemployment rates impact early voter turnout across Maryland counties?
+
+#Answer 5: Counties with lower unemployment and higher incomes see more people turning out for early voting, showing that economic stability can make it easier for people to participate. When life is a little less stressful financially, it might be simpler to make time to vote early. This pattern shows how a community’s economic situation can influence voter turnout.
 
 ```{r}
-
 md_data <- get_acs(
   geography = "county",
   variables = c(
@@ -204,23 +186,18 @@ md_data <- get_acs(
   ) |>
     #i asked chatgpt why this code wasn't running, and it told me to add this code, which rearranged columns and the data points in my column to more accurately identify the trends in the data set. 
 
-  
   mutate(
     unemployment_rate = (unemployment/labor_force) * 100
   ) |>
   select(county_name, unemployment_rate, median_income)|> 
   
   arrange(county_name)
-
  
 #i used chatgpt for this mutate function. I was unsure how to fix all the names of the counties and keep Baltimore County and make Baltimore City correct so i asked how to change the county_names to fit the format so i could bind this data set to the early voting data set.   
-  
 
 md_data
-  
-
-  
 ```
+
 ```{r}
 q_5_final <- md_data |> 
   left_join(county_2024, by = "county_name") |>
@@ -229,10 +206,10 @@ q_5_final <- md_data |>
 q_5_final
 ```
 
+
 #Question 2: What is the relationship between the proportion of eligible voters and early voter turnout in recent elections, and how do demographics explain differences across counties?
 
-#Answer 2: Counties with more eligible voters tend to have higher early voting turnout. Demographics like education don't explain the differences differences between countiesas much as expected.
-
+#Answer 2: Counties with more eligible voters tend to have higher early voting turnout. Demographics like income, unemployment, and party affiliation also explain differences between counties. Demographics like education don't explain the differences differences between counties as much as expected.
 
 ```{r}
 md_data_2 <- get_acs(
@@ -292,17 +269,12 @@ md_data_2 <- get_acs(
     no_school_pct = (no_school/total_pop_over_25) *100 ) |>
   
   select(GEOID, county_name, no_school_pct, pro_school_degree_pct, masters_pct, highschool_pct, doctorate_pct, bachelor_pct, no_school_pct)
-  
-  
-  
-
  
 #i used chatgpt for this mutate function. I was unsure how to fix all the names of the counties and keep Baltimore County and make Baltimore City correct so i asked how to change the county_names to fit the format so i could bind this data set to the early voting data set.   
   
-
 md_data_2
-
 ```
+
 ```{r}
 q_2_final <- md_data_2 |> 
   left_join(county_2024, by = "county_name") |>
@@ -311,3 +283,4 @@ q_2_final <- md_data_2 |>
 
 q_2_final
 ```
+
