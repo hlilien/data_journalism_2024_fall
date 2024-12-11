@@ -1,7 +1,7 @@
 ---
-title: "lab_12"
-author: "derek willis"
-date: "11/25/2022"
+title: "lab_13"
+author: "Derek Willis"
+date: "12/10/2024"
 output: html_document
 ---
 
@@ -37,9 +37,9 @@ Let's start with the 2022 results. You'll need to locate and scrape the 2022 cou
 **Task** Scrape the county-level results for the U.S. Senate race in 2022, which can be found at https://electionresults.utah.gov/elections/, into a dataframe. You will need to make sure that you have clean headers, which may involve renaming them, and you will need to remove the total row. Make sure that the columns containing votes are numeric.
 
 ```{r}
-ut_elec_2022 <- read_csv("data/2022_election_utah.csv")
+utah_elec_2022 <- read_csv("data/2022_election_utah.csv")
 
-ut_elec_2022 <- data.frame(
+utah_elec_2022 <- data.frame(
   x1 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
   x2 = c(NA, "Beaver County", "Box Elder County", "Cache County", "Carbon County", "Daggett County", 
          "Davis County", "Duchesne County", "Emery County", "Garfield County", "Grand County", "Iron County", "Juab County", 
@@ -55,21 +55,21 @@ ut_elec_2022 <- data.frame(
   x7 = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
   )
 
-colnames(ut_elec_2022) <- c("Unused1", "County", "Evan_McMullin", "James_Hansen", 
+colnames(utah_elec_2022) <- c("Unused1", "County", "Evan_McMullin", "James_Hansen", 
                           "Mike_Lee", "Tommy_Williams", "Unused2")
-ut_elec_2022 <- ut_elec_2022 |>
+utah_elec_2022 <- utah_elec_2022 |>
   filter(!is.na(County), !County %in% c("NA", "Total"))  
 
-ut_elec_2022 <- ut_elec_2022 |>
+utah_elec_2022 <- utah_elec_2022 |>
   mutate(across(Evan_McMullin:Tommy_Williams, ~ as.numeric(.), .names = "clean_{col}"))
 
-ut_elec_2022 <- ut_elec_2022 |>
+utah_elec_2022 <- utah_elec_2022 |>
   select(-Unused1, -Unused2, -Evan_McMullin, -James_Hansen, -Mike_Lee, -Tommy_Williams) 
 
-ut_elec_2022$County <- gsub(" County", "", ut_elec_2022$County)
+utah_elec_2022$County <- gsub(" County", "", ut_elec_2022$County)
 
 
-print(ut_elec_2022)
+print(utah_elec_2022)
 ```
 
 Next, we'll get the 2018 results. Unlike the 2022 results, these are stored in an Excel file located here: https://elections.utah.gov/Media/Default/2018%20Election/2018%20General%20Election%20Canvass.xlsx. You can choose how to get the U.S. Senate results - whether you download and save the file in this lab_13 folder (we did this in pre_lab_12) or whether you download it manually and create a CSV file from the Senate results sheet in this directory. Like the 2022 results, you'll want to make a dataframe with clean headers, no total row and numeric columns for the votes.
@@ -77,9 +77,9 @@ Next, we'll get the 2018 results. Unlike the 2022 results, these are stored in a
 **Task** Get the county-level results for the U.S. Senate race in 2018, which can be found at https://elections.utah.gov/Media/Default/2018%20Election/2018%20General%20Election%20Canvass.xlsx, and turn them into a dataframe. You will need to make sure that you have clean headers, which may involve renaming them, and you will need to remove the total row. Make sure that the columns containing votes are numeric.
 
 ```{r}
-ut_elec_2018 <- read_excel("data/2018-General-Election-Canvass-1.xlsx", sheet = 2)
+utah_elec_2018 <- read_excel("data/2018-General-Election-Canvass-1.xlsx", sheet = 2)
 
-ut_elec_2018 <- tibble(
+utah_elec_2018 <- tibble(
   County = c("Beaver", "Box Elder", "Cache", "Carbon", "Daggett", "Davis", "Duchesne", "Emery", "Garfield", 
              "Grand", "Iron", "Juab", "Kane", "Millard", "Morgan", "Piute", "Rich", "Salt Lake", "San Juan", 
              "Sanpete", "Sevier", "Summit", "Tooele", "Uintah", "Utah", "Wasatch", "Washington", "Wayne", "Weber"),
@@ -109,7 +109,7 @@ ut_elec_2018 <- tibble(
                             0, 0, 1, 0, 0)
 )
 
-print(ut_elec_2018)
+print(utah_elec_2018)
 
 ```
 
@@ -118,21 +118,21 @@ Finally, join the two dataframes together:
 **Task** Join the 2022 and 2018 results into a single dataframe.
 
 ```{r}
-ut_elect_18_20 <- ut_elec_2022 |> 
-  right_join(ut_elec_2018, by = "County") |>
+utah_elect_18_20 <- utah_elec_2022 |> 
+  right_join(utah_elec_2018, by = "County") |>
   select(-Glade_G_Fitzgerald_Write_in, -Caleb_Dan_Reeve_Write_in, -Hektor_Reiksthegn_Write_in, -Abe_Korb_Write_in, -Ryan_Daniel_Jackson_Write_in, -Cody_Judy_Write_in, -Tyrone_Jensen_Write_in) 
-  clean_names(ut_elect_18_20)
-ut_elect_18_20
+  clean_names(utah_elect_18_20)
+utah_elect_18_20
 ```
 
 ## Questions
 
 **Q1.** Calculate the difference in votes between Evan McMullin and Jenny Wilson and save it your combined dataframe. Write up some sentences that could go in a story describing where McMullin outperformed Wilson and where he didn't. Mention the margins and describe the counties you mention (location, population or another factor, such as 2020 presidential vote).
 
-**Evan McMullin seems to have dominated Jenny Wilson, winning Utah, Salt Lake, and Davis counties, the three largest in the state. He only lost one of 29 counties (San Juan). Despite Salt Lake being the largest, McMullin had a bigger vote margin in Utah County, winning by 43,382 votes.** 
+**Evan McMullin dominated Jenny Wilson, winning Utah, Salt Lake, and Davis counties, the three largest in the state. He only lost one of 29 counties, that being San Juan). Despite Salt Lake being the largest, McMullin had a bigger vote margin in Utah County, winning by 43,382 votes.** 
 
 ```{r}
-ut_elect_18_20 <- ut_elec_2018 |>
+ut_elect_18_20 <- ut_elect_18_20 |>
   mutate(mcmullin_wilson_diff=clean_Evan_McMullin-Jenny_Wilson_DEM
 ) |>
   arrange(desc(mcmullin_wilson_diff))
@@ -146,11 +146,11 @@ ut_elect_18_20
 **Mitt Romney dominated in Salt Lake, Davis, and Utah counties, reflecting the state's overall vote. Utah backed Trump with 59.4%, but Romney won Salt Lake County, which voted 54% Democratic in 2020.** 
 
 ```{r}
-ut_elect_18_20 <- ut_elect_18_20 |>
+utah_elect_18_20 <- utah_elect_18_20 |>
   mutate(lee_romney_diff=clean_Mike_Lee-Mitt_Romney_REP) |>
   arrange(desc(lee_romney_diff))
 
-ut_elect_18_20
+utah_elect_18_20
 ```
 
 **Q3** Sen. Ben Cardin, D-Maryland, has posted hundreds of press releases at https://www.cardin.senate.gov/?post_type=press-releases. It would be great to have all of them in a dataframe that has the following columns: date, title and url.
@@ -163,21 +163,21 @@ When you're done, rename the columns so they make sense, then make sure the date
 
 Finally, tell me what questions you could ask of this data. Be creative.
 
-**How often does Sen. Ben Cardin post press releases? Do press releases follow any specific patterns or trends?** 
+**How often does Sen. Ben Cardin post press releases? Do his press releases reveal any patterns or tell a story over time?** 
 
 ```{r}
-ben_press_url <- "https://www.cardin.senate.gov/?post_type=press-releases"
+cardin_press_url <- "https://www.cardin.senate.gov/?post_type=press-releases"
 
-ben_press_releases <- ben_press_url |>
+cardin_press_releases <- cardin_press_url |>
   read_html() |>
   html_elements('h3 a')
 
-dates <- ben_press_url |>
+dates <- cardin_press_url |>
   read_html() |>
   html_elements('h5 a')
   
   
-ben_release_date <- tibble(
+cardin_release_date <- tibble(
   date=mdy(html_text(dates))
 )
 
